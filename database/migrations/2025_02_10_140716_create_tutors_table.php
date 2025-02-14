@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('instagram_acc')->nullable();
             $table->string('twitter_acc')->nullable();
             $table->string('linkedin_acc')->nullable();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

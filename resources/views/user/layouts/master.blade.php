@@ -32,7 +32,7 @@
   {{-- <link href="{{asset('vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet"> --}}
 
   <!-- Main CSS File -->
-  <link href="{{asset('')}}css/main.css" rel="stylesheet">
+  <link href="{{asset('css/main.css')}}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: QuickStart

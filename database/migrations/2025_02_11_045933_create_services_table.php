@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('description');
             $table->string('type');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

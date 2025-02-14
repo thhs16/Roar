@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('nickname');
+            $table->string('name')->nullable();
+            $table->string('nickname')->nullable();
             $table->string('email')->unique();
-            $table->timestamps('email_verified_at');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password')->nullable();
             $table->string('image')->nullable();
-            $table->string('role')->default('simple');
-            $table->string('provider_type')->nullable();
+            $table->string('role')->default('user');
+            $table->string('provider_type')->default('simple');
             $table->string('provider_id')->nullable();
             $table->string('provider_token')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps(); // auto create created at and updated at s
         });
     }
 

@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('service_id');
             $table->longText('comment');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 
