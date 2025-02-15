@@ -15,13 +15,15 @@ class adminController extends Controller
 
     // create service
     public function createService(){
-        return view('admin.createService');
+        $category = Category::select('id', 'name')->get();
+
+        return view('admin.createService', compact('category'));
     }
 
-    // create service DB
-    public function createServiceDB(Request $request){
-        dd($request->all());
-    }
+    // // create service DB
+    // public function createServiceDB(Request $request){
+    //     dd($request->all());
+    // }
 
     // create cateogry
     public function createCategory(){

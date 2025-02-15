@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('category_id');
             $table->string('image');
-            $table->string('description');
+            $table->longText('description');
             $table->string('type');
+            $table->string('fees');
             $table->timestamps();
         });
     }
