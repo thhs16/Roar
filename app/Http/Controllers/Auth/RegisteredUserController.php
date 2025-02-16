@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +36,8 @@ class RegisteredUserController extends Controller
             'confirmPassword' => 'required|same:password'
         ]);
 
-        // dd(Hash::make($request->password));
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),

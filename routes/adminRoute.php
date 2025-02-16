@@ -48,8 +48,41 @@ use App\Http\Controllers\ServiceController;
     Route::get('admin/category/delete/{category_id}', [adminController::class, 'categoryDelete'])
             ->name('categoryDelete');
 
+    // Experts
     Route::get('admin/experts/create', [TutorController::class, 'index'])
             ->name('createExperts');
+
+    Route::get('admin/experts/list', [TutorController::class, 'show'])
+            ->name('expertList');
+
+    Route::post('admin/experts/info', [TutorController::class, 'store'])
+            ->name('expertInfo');
+
+    Route::get('admin/experts/update/{expertId}', [TutorController::class, 'update'])
+            ->name('updateExpert');
+
+    Route::post('admin/experts/update', [TutorController::class, 'updateDB'])
+            ->name('updateExpertDB');
+
+    Route::get('admin/experts/delete/{expertId}', [TutorController::class, 'destroy'])
+            ->name('deleteExpert');
+
+    // Admin & User List
+    Route::get('admin/create', [adminController::class, 'createAdmin'])
+            ->name('createAdmin');
+
+    Route::post('admin/create', [adminController::class, 'createAdminDB'])
+            ->name('createAdminDB');
+
+    Route::get('admin/adminList', [adminController::class, 'adminList'])
+            ->name('adminList');
+
+    Route::get('admin/userList', [adminController::class, 'userList'])
+            ->name('userList');
+
+
+
+
 
 
 

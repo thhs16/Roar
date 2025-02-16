@@ -54,8 +54,8 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
-                        <span>Admin</span>
+                        <h6 class="mb-0">{{auth()->user()->name}}</h6>
+                        <span>{{auth()->user()->role}}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -76,8 +76,17 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Speaking Experts</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('createExperts') }}" class="dropdown-item">Create an Expert</a>
-                            <a href="signup.html" class="dropdown-item">Experts' List</a>
+                            <a href="{{ route('createExperts') }}" class="dropdown-item">Adding Expert's Info</a>
+                            <a href="{{ route('expertList') }}" class="dropdown-item">Experts' List</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Admin & User List </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('createAdmin') }}" class="dropdown-item">Create an Admin</a>
+                            <a href="{{ route('adminList') }}" class="dropdown-item">Admin List</a>
+                            <a href="{{ route('userList') }}" class="dropdown-item">User List</a>
                         </div>
                     </div>
                 </div>
@@ -164,11 +173,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <span class="d-none d-lg-inline-flex">{{auth()->user()->name}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
+                            {{-- <a href="#" class="dropdown-item">Settings</a> --}}
                             <a href="#" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

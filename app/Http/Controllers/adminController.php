@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\adminController;
+use Illuminate\Validation\Rules\Password;
 
 class adminController extends Controller
 {
@@ -76,6 +79,55 @@ class adminController extends Controller
         return back()->with('Success Message', 'The category is deleted successfully.');
     }
 
+    public function createAdmin(){
+        return view('admin.createAdmin');
+    }
+
+    public function createAdminDB(Request $request){
+
+        $request->validate([
+            'name' => ['required'],
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required',
+            'password' => ['required', Password::defaults()],
+            'confirmPassword' => 'required|same:password'
+        ]);
+
+        // admin or Expert
+        $data = [
+            'image' => '',
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ];
+        $fileName = 'roar'.uniqid() . $request->file('image')->getClientOriginalName();
+        $request->file('image')->move(public_path().'/admin/adminAndExpertProfileImg/',$fileName);
+        $data['image'] = $fileName;
+
+        User::create($data);
+
+
+        
+        if($request->role == 'admin'){
+            return to_route('adminList')->with('Success Message', 'The admin account is created successfully.');
+        }else{
+            return to_route('expertList')->with('Success Message', 'The expert account is created successfully.');
+        }
+
+    }
+
+    public function adminList(){
+        $adminList = User::where('role', 'superAdmin')->orWhere('role', 'admin')->get();
+        return view('admin.adminList', compact('adminList'));
+    }
+
+    public function userList(){
+        $userList = User::where('role', 'user')->get();
+        return view('admin.userList', compact('userList'));
+    }
 
 
 
