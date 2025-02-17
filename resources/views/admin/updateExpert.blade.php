@@ -11,7 +11,7 @@
 
                     <form action="{{ route('updateExpertDB') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="id" value="{{$expert->id}}">
+                        <input type="hidden" name="id" value="{{$expertId}}">
                         <div class="row">
                             <div class="mb-3 col-4">
                                 <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="image">

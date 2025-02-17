@@ -2,34 +2,16 @@
     <div class="container swiper">
         <div class="slider-wrapper">
           <div class="card-list swiper-wrapper">
+            @foreach ($expert as $expert_item)
             <div class="card-item swiper-slide">
-                <img src="https://i.pinimg.com/736x/59/27/3d/59273d3e6ccddd906b58414f746b858a.jpg" alt="User Image" class="user-image">
-                <h2 class="user-name">James Wilson</h2>
-                <p class="user-profession">Software Developer</p>
-                <p class=" text-black-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At laudantium possimus nisi esse velit rem adipisci doloribus explicabo asperiores eveniet.</p>
-                <button class="message-button">Message</button>
+                <img src="{{ asset('admin/adminAndExpertProfileImg/roar67af4230ea009DALL·E 2025-01-25 21.10.26 - A cute anime-style chubby girl kneeling in prayer, with her hands clasped together and eyes closed, exuding a peaceful and serene vibe. She has soft f') }}" alt="User Image" class="user-image">
+                <h2 class="user-name">{{$expert_item->display_name}}</h2>
+                <p class="user-profession">Roar Speaking Expert</p>
+                <p class=" text-black-50">{{ $truncated = Str::limit($expert_item->about, 100, ' ...'); }}</p>
+                <p class=" text-muted">Trained Student : {{$expert_item->trained_student}}</p>
+                <a href="{{ route('aptDetail', $expert_item->user_id ) }}" class="message-button">Take An Appointment</a>
             </div>
-            <div class="card-item swiper-slide">
-                <img src="https://i.pinimg.com/736x/59/27/3d/59273d3e6ccddd906b58414f746b858a.jpg" alt="User Image" class="user-image">
-                <h2 class="user-name">James Wilson</h2>
-                <p class="user-profession">Software Developer</p>
-                <p class=" text-black-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At laudantium possimus nisi esse velit rem adipisci doloribus explicabo asperiores eveniet.</p>
-                <button class="message-button">Message</button>
-            </div>
-            <div class="card-item swiper-slide">
-                <img src="https://i.pinimg.com/736x/59/27/3d/59273d3e6ccddd906b58414f746b858a.jpg" alt="User Image" class="user-image">
-                <h2 class="user-name">James Wilson</h2>
-                <p class="user-profession">Software Developer</p>
-                <p class=" text-black-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At laudantium possimus nisi esse velit rem adipisci doloribus explicabo asperiores eveniet.</p>
-                <button class="message-button">Message</button>
-            </div>
-            <div class="card-item swiper-slide">
-                <img src="https://i.pinimg.com/736x/59/27/3d/59273d3e6ccddd906b58414f746b858a.jpg" alt="User Image" class="user-image">
-                <h2 class="user-name">James Wilson</h2>
-                <p class="user-profession">Software Developer</p>
-                <p class=" text-black-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At laudantium possimus nisi esse velit rem adipisci doloribus explicabo asperiores eveniet.</p>
-                <button class="message-button">Message</button>
-            </div>
+            @endforeach
 
           </div>
           <div class="swiper-pagination"></div>

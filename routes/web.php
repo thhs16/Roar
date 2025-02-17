@@ -1,15 +1,30 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\Tutor;
 // use App\Http\Controllers\adminController;
+use App\Models\Service;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfileController;
+
 
 Route::get('/', function () {
     return view('user.home');
 });
 
 Route::get('/dashboard', function () {
-    return view('user.home');
+
+    $service = Service::get();
+
+    $expert = Tutor::get();
+
+    $category = Category::get();
+
+    // dd($category->toArray());
+
+    return view('user.home', compact('service', 'expert', 'category') );
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -19,3 +34,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+

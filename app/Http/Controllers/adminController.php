@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\adminController;
@@ -110,7 +111,7 @@ class adminController extends Controller
         User::create($data);
 
 
-        
+
         if($request->role == 'admin'){
             return to_route('adminList')->with('Success Message', 'The admin account is created successfully.');
         }else{
@@ -127,6 +128,20 @@ class adminController extends Controller
     public function userList(){
         $userList = User::where('role', 'user')->get();
         return view('admin.userList', compact('userList'));
+    }
+
+    public function aptToCheck(){
+        $pending_appointment = Appointment::where('status', 'pending')->get();
+
+        return view('admin.aptToCheck', compact('pending_appointment'));
+    }
+
+    public function approveAptAdmin($aptId){
+        Appointment::where('id', $aptId)->update([
+            'status' => 'booked'
+        ]);
+
+        return to_route('aptToCheck');
     }
 
 

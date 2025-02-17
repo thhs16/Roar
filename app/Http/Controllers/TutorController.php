@@ -11,6 +11,11 @@ class TutorController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function expertDashboard()
+    {
+        return view('expert.expertDashboard');
+    }
+
     public function index()
     {
         return view('admin.createExperts');
@@ -68,7 +73,7 @@ class TutorController extends Controller
      */
     public function updateDB(Request $request)
     {
-        dd($request->all());
+
         // id should not be null
 
         // Note | serviceImage does not appear when the value is null
@@ -82,61 +87,93 @@ class TutorController extends Controller
         ->leftJoin('tutors', 'tutors.user_id', 'users.id')
         ->first();
 
+
         // condition
-        $imageChange = $request->serviceImage != null ? 1 : 0 ;     // 0
-        $nameChange = $request->serviceTitle != $expert->title ? 1 : 0 ;      // 0
-        $displayNameChange = $request->serviceType != $expert->type ? 1 : 0 ;       //0
-        $aboutChange = $request->serviceFees != $expert->fees ? 1 : 0 ;     //0
-        $categoryIdChange = $request->serviceCategoryId != $expert->category_id ? 1 : 0 ;  //0
-        $descriptionChange = $request->serviceDescription != $expert->description ? 1 : 0 ;        //0
+        $imageChange = $request->image != null ? 1 : 0 ;     // 0
+        $nameChange = $request->name != $expert->name ? 1 : 0 ;      // 0
+        $displayNameChange = $request->displayName != $expert->display_name ? 1 : 0 ;       //0
+        $aboutChange = $request->about != $expert->about ? 1 : 0 ;     //0
+        $trainedStudentChange = $request->trainedStudent != $expert->trained_student ? 1 : 0 ;  //0
+        $facebookAccChange = $request->facebookAcc != $expert->facebook_acc ? 1 : 0 ;        //0
+        $instagramAccChange = $request->instagramAcc != $expert->instagram_acc ? 1 : 0 ;        //0
+        $twitterAccChange = $request->twitterAcc != $expert->twitter_acc ? 1 : 0 ;        //0
+        $linkedinAccChange = $request->linkedinAcc != $expert->linkedin_acc ? 1 : 0 ;        //0
 
-        $changeCondition = $imageChange | $titleChange | $typeChange | $feesChange | $categoryIdChange | $descriptionChange ;
+        $changeCondition = $imageChange | $nameChange | $displayNameChange | $aboutChange | $trainedStudentChange | $facebookAccChange | $instagramAccChange | $twitterAccChange| $linkedinAccChange;
 
-        $data = [];
-
+        $dataUser = [];
+        $dataExpert = [];
 
         if($changeCondition){
 
-            if($titleChange){
+            if($nameChange){
                 // array_push($data, [
                 //     'title' => $request->serviceTitle
                 // ]);
 
-                $data = array_merge($data , ['title' => $request->serviceTitle]);
+                $dataUser = array_merge($dataUser , ['name' => $request->name]);
 
             }
-            if ($typeChange) {
-                $data = array_merge($data, ['type' => $request->serviceType]);
+            if ($displayNameChange) {
+                $dataExpert = array_merge($dataExpert, ['display_name' => $request->displayName]);
+
+                // dd($dataExpert);
             }
 
-            if ($feesChange) {
-                $data = array_merge($data, ['fees' => $request->serviceFees]);
+            if ($aboutChange) {
+                $dataExpert = array_merge($dataExpert, ['about' => $request->about]);
             }
 
-            if ($categoryIdChange) {
-                $data = array_merge($data, ['category_id' => $request->serviceCategoryId]);
+            if ($trainedStudentChange) {
+                $dataExpert = array_merge($dataExpert, ['trained_student' => $request->trainedStudent]);
             }
 
-            if ($descriptionChange) {
-                $data = array_merge($data, ['description' => $request->serviceDescription]);
+            if ($facebookAccChange) {
+                $dataExpert = array_merge($dataExpert, ['facebook_acc' => $request->facebookAcc]);
+            }
+
+            if ($instagramAccChange) {
+                $dataExpert = array_merge($dataExpert, ['instagram_acc' => $request->instagramAcc]);
+            }
+
+            if ($twitterAccChange) {
+                $dataExpert = array_merge($dataExpert, ['twitter_acc' => $request->twitterAcc]);
+            }
+
+            if ($linkedinAccChange) {
+                $dataExpert = array_merge($dataExpert, ['linkedin_acc' => $request->linkedinAcc]);
             }
 
             if ($imageChange) {
 
-                $fileName = 'roar'.uniqid() . $request->file('serviceImage')->getClientOriginalName();
+                $fileName = 'roar'.uniqid() . $request->file('image')->getClientOriginalName();
 
-                $request->file('serviceImage')->move(public_path().'/serviceImages/', $fileName);
+                $request->file('image')->move(public_path().'/admin/adminAndExpertProfileImg/', $fileName);
 
-                unlink( public_path('serviceImages/'.$service->image) );
+                unlink( public_path("admin/adminAndExpertProfileImg/".$expert->image) );
 
-
-
-                $data = array_merge($data, ['image' => $fileName]);
+                $data = array_merge($dataUser, ['image' => $fileName]);
             }
 
-            Service::where('id', $request->serviceId)->update($data);
+            // dd($dataUser);
+            // dd($dataExpert);
 
-            return to_route('serviceList')->with('Success Message', 'The service is updated successfully.');
+            if($dataUser != []){
+                User::where('id', $request->id)->update($dataUser);
+            }
+
+            if($dataExpert != []){
+                $exists = Tutor::where('user_id', $request->id)->exists();
+
+                if($exists){
+                    Tutor::where('id', $request->id)->update($dataExpert);
+                }else{
+                    $dataExpert = array_merge($dataExpert, ['user_id' => $request->id]);
+                    Tutor::create($dataExpert);
+                }
+            }
+
+            return to_route('expertList')->with('Success Message', 'The expert info is updated successfully.');
 
          }else{
             return back()->with('Success Message', 'No Data Changes. You need to edit data to update');
@@ -153,14 +190,21 @@ class TutorController extends Controller
         ->leftJoin('tutors', 'tutors.user_id', 'users.id')
         ->first();
 
-        return view('admin.updateExpert', compact('expert'));
+        return view('admin.updateExpert', compact('expert', 'expertId'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tutor $tutor)
+    public function destroy($expertId)
     {
-        //
+        User::where('id', $expertId)->delete();
+        return to_route('expertList')->with('Success Message', 'The expert is deleted successfully.');
+    }
+
+
+    public function addAptTime()
+    {
+        return view('expert.addAptTime');
     }
 }

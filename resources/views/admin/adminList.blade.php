@@ -36,7 +36,7 @@
                             <td>{{$adminList_item->email}}</td>
                             <td>{{$adminList_item->phone}}</td>
                             <td>
-                                <a href="{{ route('updateCategoryPage', $adminList_item->id ) }}" class="btn btn-primary">Update</a>
+                                <a href="{{ route('updateAdmin', $adminList_item->id ) }}" class="btn btn-primary">Update</a>
                                 <a href="{{ route('categoryDelete', $adminList_item->id ) }}"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>

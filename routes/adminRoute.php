@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AppointmentController;
 
 
     Route::get('admin/dashboard', [adminController::class, 'adminDashboard'])
@@ -48,6 +50,12 @@ use App\Http\Controllers\ServiceController;
     Route::get('admin/category/delete/{category_id}', [adminController::class, 'categoryDelete'])
             ->name('categoryDelete');
 
+    Route::get('admin/checkAppointment', [adminController::class, 'aptToCheck'])
+            ->name('aptToCheck');
+
+    Route::get('admin/approveAptAdmin/{aptId}', [adminController::class, 'approveAptAdmin'])
+            ->name('approveAptAdmin');
+
     // Experts
     Route::get('admin/experts/create', [TutorController::class, 'index'])
             ->name('createExperts');
@@ -80,9 +88,29 @@ use App\Http\Controllers\ServiceController;
     Route::get('admin/userList', [adminController::class, 'userList'])
             ->name('userList');
 
+    // expert
+    Route::get('expert/dashboard', [TutorController::class, 'expertDashboard'])
+            ->name('expertDashboard');
 
+    Route::get('expert/apt/add', [TutorController::class, 'addAptTime'])
+            ->name('addAptTime');
 
+    Route::post('expert/apt/create', [AppointmentController::class, 'create'])
+            ->name('createApt');
 
+    Route::get('expert/apt/list', [AppointmentController::class, 'show'])
+            ->name('aptList');
 
+    Route::get('expert/apt/detail/{expertId}', [AppointmentController::class, 'detail'])
+            ->name('aptDetail');
 
+    Route::get('expert/apt/take/{aptId}', [AppointmentController::class, 'takeApt'])
+            ->name('takeApt'); // aptStatus change for the admin to check
+
+    Route::post('expert/apt/complete', [AppointmentController::class, 'aptPaymentComplete'])
+    ->name('aptPaymentComplete');
+
+    // userServices
+    Route::get('/myServices', [UserController::class, 'userServices'])
+    ->name('userServices');
 

@@ -22,13 +22,14 @@
 
     </section><!-- /Hero Section -->
 
-    <!-- Featured Services Section -->
+    <!-- Statistics -->
     <section id="featured-services" class="featured-services section light-background">
 
       <div class="container">
 
         <div class="row gy-4">
 
+        <!-- End Service Item -->
           <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
@@ -81,57 +82,25 @@
 
           <div class="row gy-4">
 
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-              <div class="pricing-item featured">
-                <p class="popular">Popular</p>
-                <h3 class="">Free Consultation</h3>
-                <img src="https://tefl.duxrec.com/wp-content/uploads/2022/07/dux-blog-18-07-2.jpg" class="mt-3 mb-4 img-fluid rounded" alt="">
-                <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus eveniet optio dicta in ratione assumenda quod? Corporis blanditiis, tempora dolore, est dicta doloremque iusto sed sunt vero quasi ex aspernatur soluta molestias, vel animi sequi aperiam dignissimos. Cupiditate pariatur perspiciatis odit deleniti, aliquid doloremque blanditiis rerum? Laudantium excepturi corrupti obcaecati?</p>
-                <ul>
-                    <li class="row"><label class="col-4 ">Duration </label><span class="col">: 15 mins</span></li>
-                    <li class="row"><label class="col-4 ">Tutor </label><span class="col">: Random Speaking Expert</span></li>
-                    <li class="row"><label class="col-4 ">Type </label><span class="col">: Free</span></li>
-                </ul>
-                <h4><sup>$</sup>0<span> / session</span></h4>
-                <a href="#" class="cta-btn">See More</a>
-                {{-- <p class="text-center small">No credit card required</p> --}}
-
-              </div>
-            </div><!-- End Pricing Item -->
+            @foreach ($service as $service_item)
             <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
                 <div class="pricing-item featured">
-                  <p class="popular">Popular</p>
-                  <h3 class="">Free Consultation</h3>
-                  <img src="https://tefl.duxrec.com/wp-content/uploads/2022/07/dux-blog-18-07-2.jpg" class="mt-3 mb-4 img-fluid rounded" alt="">
-                  <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus eveniet optio dicta in ratione assumenda quod? Corporis blanditiis, tempora dolore, est dicta doloremque iusto sed sunt vero quasi ex aspernatur soluta molestias, vel animi sequi aperiam dignissimos. Cupiditate pariatur perspiciatis odit deleniti, aliquid doloremque blanditiis rerum? Laudantium excepturi corrupti obcaecati?</p>
+                  <p class="popular">{{$service_item->id}}</p>
+                  <h3 class="">{{$service_item->title}}</h3>
+                  <img src="{{ asset('serviceImages/'.$service_item->image) }}" class="mt-3 mb-4 img-fluid rounded" alt="">
+                  <p class="description">{{ $truncated = Str::limit($service_item->description, 100, ' ...'); }}</p>
                   <ul>
                       <li class="row"><label class="col-4 ">Duration </label><span class="col">: 15 mins</span></li>
-                      <li class="row"><label class="col-4 ">Tutor </label><span class="col">: Random Speaking Expert</span></li>
-                      <li class="row"><label class="col-4 ">Type </label><span class="col">: Free</span></li>
+                      <li class="row"><label class="col-4 ">Tutor </label><span class="col">@if ($service_item->type == 'free'): Random Speaking Expert @else: Preferred Speaking Expert  @endif</span></li>
+                      <li class="row"><label class="col-4 ">Type </label><span class="col">: {{$service_item->type}}</span></li>
                   </ul>
-                  <h4><sup>$</sup>0<span> / session</span></h4>
-                  <a href="#" class="cta-btn">See More</a>
+                  <h4><sup>mmk</sup>{{$service_item->fees}}<span> / session</span></h4>
+                  <a href="" class="cta-btn">See More</a>
                   {{-- <p class="text-center small">No credit card required</p> --}}
 
                 </div>
-            </div><!-- End Pricing Item -->
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                <div class="pricing-item featured">
-                  <p class="popular">Popular</p>
-                  <h3 class="">Free Consultation</h3>
-                  <img src="https://tefl.duxrec.com/wp-content/uploads/2022/07/dux-blog-18-07-2.jpg" class="mt-3 mb-4 img-fluid rounded" alt="">
-                  <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus eveniet optio dicta in ratione assumenda quod? Corporis blanditiis, tempora dolore, est dicta doloremque iusto sed sunt vero quasi ex aspernatur soluta molestias, vel animi sequi aperiam dignissimos. Cupiditate pariatur perspiciatis odit deleniti, aliquid doloremque blanditiis rerum? Laudantium excepturi corrupti obcaecati?</p>
-                  <ul>
-                      <li class="row"><label class="col-4 ">Duration </label><span class="col">: 15 mins</span></li>
-                      <li class="row"><label class="col-4 ">Tutor </label><span class="col">: Random Speaking Expert</span></li>
-                      <li class="row"><label class="col-4 ">Type </label><span class="col">: Free</span></li>
-                  </ul>
-                  <h4><sup>$</sup>0<span> / session</span></h4>
-                  <a href="#" class="cta-btn">See More</a>
-                  {{-- <p class="text-center small">No credit card required</p> --}}
-
-                </div>
-            </div><!-- End Pricing Item -->
+              </div><!-- End Pricing Item -->
+            @endforeach
 
 
 
@@ -384,71 +353,21 @@
 
         <div class="row g-5">
 
+          @foreach ($category as $category_item)
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item item-cyan position-relative">
               <i class="bi bi-activity icon"></i>
               <div>
-                <h3>Nesciunt Mete</h3>
+                <h3>{{$category_item->name}}</h3>
                 <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
                 <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
+                {{-- Display courses under the category --}}
               </div>
             </div>
           </div><!-- End Service Item -->
+          @endforeach
 
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item item-orange position-relative">
-              <i class="bi bi-broadcast icon"></i>
-              <div>
-                <h3>Eosle Commodi</h3>
-                <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-                <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
 
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item item-teal position-relative">
-              <i class="bi bi-easel icon"></i>
-              <div>
-                <h3>Ledo Markt</h3>
-                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-                <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item item-red position-relative">
-              <i class="bi bi-bounding-box-circles icon"></i>
-              <div>
-                <h3>Asperiores Commodi</h3>
-                <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-                <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item item-indigo position-relative">
-              <i class="bi bi-calendar4-week icon"></i>
-              <div>
-                <h3>Velit Doloremque.</h3>
-                <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-                <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item item-pink position-relative">
-              <i class="bi bi-chat-square-text icon"></i>
-              <div>
-                <h3>Dolori Architecto</h3>
-                <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-                <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
 
         </div>
 
