@@ -62,6 +62,7 @@ Route::middleware(['user', 'auth', 'web'])->group(function () {
         )
         ->get();
 
+
         return view('user.home', compact('service', 'expert', 'category', 'ratingComment', 'expert_count', 'student_count', 'service_count') );
 
     })->middleware(['auth', 'verified'])->name('dashboard');
@@ -77,7 +78,7 @@ Route::middleware(['user', 'auth', 'web'])->group(function () {
     Route::get('service/serviceCategory/{categoryId}', [ServiceController::class, 'serviceCategory'])->name('serviceCategory');
 
     // search searchService
-    Route::post('service/search', [ServiceController::class, 'searchService'])->name('searchService');
+    // Route::post('service/search', [ServiceController::class, 'searchService'])->name('searchService');
 
     //
     Route::get('profile', [UserController::class, 'profile'])->name('userProfile');
@@ -101,4 +102,6 @@ Route::middleware(['user', 'auth', 'web'])->group(function () {
     // allServicesPg
     Route::get('allServices', [ServiceController::class, 'allServicesPg'])
     ->name('allServicesPg');
+
+
 });

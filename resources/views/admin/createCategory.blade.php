@@ -16,7 +16,8 @@
                     <form action=" {{ route('createCategoryDB') }}" method="POST">
                         @csrf
                         <div class="form-floating mb-3">
-                            <input type="text" name="categoryName" class="form-control" id="floatingText" placeholder="jhondoe">
+                            <input type="text" name="categoryName" class="form-control" id="floatingText"
+                                placeholder="jhondoe">
                             <label for="floatingText">Category Name</label>
                         </div>
 

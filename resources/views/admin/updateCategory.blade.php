@@ -15,9 +15,10 @@
 
                     <form action=" {{ route('updateCategory') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="categoryId" value="{{$category_id}}">
+                        <input type="hidden" name="categoryId" value="{{ $category_id }}">
                         <div class="form-floating mb-3">
-                            <input type="text" name="categoryName" value="{{$category_name->name}}" class="form-control" id="floatingText" placeholder="jhondoe">
+                            <input type="text" name="categoryName" value="{{ $category_name->name }}"
+                                class="form-control" id="floatingText" placeholder="jhondoe">
                             <label for="floatingText">Category Name</label>
                         </div>
 

@@ -15,16 +15,16 @@ class TutorController extends Controller
     public function expertDashboard()
     {
         $booked_apt_count = Appointment::where('status', 'booked')
-                            ->where('expert_id', auth()->user()->id)
-                            ->count();
+            ->where('expert_id', auth()->user()->id)
+            ->count();
 
         $pending_apt_count = Appointment::where('status', 'pending')
-                            ->where('expert_id', auth()->user()->id)
-                            ->count();
+            ->where('expert_id', auth()->user()->id)
+            ->count();
 
         $avl_apt_count = Appointment::where('status', 'available')
-                            ->where('expert_id', auth()->user()->id)
-                            ->count();
+            ->where('expert_id', auth()->user()->id)
+            ->count();
 
         return view('expert.expertDashboard', compact('booked_apt_count', 'pending_apt_count', 'avl_apt_count'));
     }
@@ -41,7 +41,7 @@ class TutorController extends Controller
             "userId" => 'required',
             "displayName" => 'required',
             "about" => 'required'
-     ]);
+        ]);
 
         // admin or Expert
         $data = [
@@ -74,8 +74,6 @@ class TutorController extends Controller
     public function updateDB(Request $request)
     {
 
-        // id should not be null
-
         // Note | serviceImage does not appear when the value is null
         $validation = $request->validate([
             'name' => 'required',
@@ -83,35 +81,32 @@ class TutorController extends Controller
         ]);
 
         $expert = User::select('users.*', 'tutors.*')
-        ->where('users.id', $request->id)
-        ->leftJoin('tutors', 'tutors.user_id', 'users.id')
-        ->first();
+            ->where('users.id', $request->id)
+            ->leftJoin('tutors', 'tutors.user_id', 'users.id')
+            ->first();
 
 
         // condition
-        $imageChange = $request->image != null ? 1 : 0 ;     // 0
-        $nameChange = $request->name != $expert->name ? 1 : 0 ;      // 0
-        $displayNameChange = $request->displayName != $expert->display_name ? 1 : 0 ;       //0
-        $aboutChange = $request->about != $expert->about ? 1 : 0 ;     //0
-        $trainedStudentChange = $request->trainedStudent != $expert->trained_student ? 1 : 0 ;  //0
-        $facebookAccChange = $request->facebookAcc != $expert->facebook_acc ? 1 : 0 ;        //0
-        $instagramAccChange = $request->instagramAcc != $expert->instagram_acc ? 1 : 0 ;        //0
-        $twitterAccChange = $request->twitterAcc != $expert->twitter_acc ? 1 : 0 ;        //0
-        $linkedinAccChange = $request->linkedinAcc != $expert->linkedin_acc ? 1 : 0 ;        //0
+        $imageChange = $request->image != null ? 1 : 0;     // 0
+        $nameChange = $request->name != $expert->name ? 1 : 0;      // 0
+        $displayNameChange = $request->displayName != $expert->display_name ? 1 : 0;       //0
+        $aboutChange = $request->about != $expert->about ? 1 : 0;     //0
+        $trainedStudentChange = $request->trainedStudent != $expert->trained_student ? 1 : 0;  //0
+        $facebookAccChange = $request->facebookAcc != $expert->facebook_acc ? 1 : 0;        //0
+        $instagramAccChange = $request->instagramAcc != $expert->instagram_acc ? 1 : 0;        //0
+        $twitterAccChange = $request->twitterAcc != $expert->twitter_acc ? 1 : 0;        //0
+        $linkedinAccChange = $request->linkedinAcc != $expert->linkedin_acc ? 1 : 0;        //0
 
-        $changeCondition = $imageChange | $nameChange | $displayNameChange | $aboutChange | $trainedStudentChange | $facebookAccChange | $instagramAccChange | $twitterAccChange| $linkedinAccChange;
+        $changeCondition = $imageChange | $nameChange | $displayNameChange | $aboutChange | $trainedStudentChange | $facebookAccChange | $instagramAccChange | $twitterAccChange | $linkedinAccChange;
 
         $dataUser = [];
         $dataExpert = [];
 
-        if($changeCondition){
+        if ($changeCondition) {
 
-            if($nameChange){
-                // array_push($data, [
-                //     'title' => $request->serviceTitle
-                // ]);
+            if ($nameChange) {
 
-                $dataUser = array_merge($dataUser , ['name' => $request->name]);
+                $dataUser = array_merge($dataUser, ['name' => $request->name]);
 
             }
             if ($displayNameChange) {
@@ -146,25 +141,25 @@ class TutorController extends Controller
 
             if ($imageChange) {
 
-                $fileName = 'roar'.uniqid() . $request->file('image')->getClientOriginalName();
+                $fileName = 'roar' . uniqid() . $request->file('image')->getClientOriginalName();
 
-                $request->file('image')->move(public_path().'/admin/adminAndExpertProfileImg/', $fileName);
+                $request->file('image')->move(public_path() . '/admin/adminAndExpertProfileImg/', $fileName);
 
-                unlink( public_path("admin/adminAndExpertProfileImg/".$expert->image) );
+                unlink(public_path("admin/adminAndExpertProfileImg/" . $expert->image));
 
                 $data = array_merge($dataUser, ['image' => $fileName]);
             }
 
-            if($dataUser != []){
+            if ($dataUser != []) {
                 User::where('id', $request->id)->update($dataUser);
             }
 
-            if($dataExpert != []){
+            if ($dataExpert != []) {
                 $exists = Tutor::where('user_id', $request->id)->exists();
 
-                if($exists){
+                if ($exists) {
                     Tutor::where('id', $request->id)->update($dataExpert);
-                }else{
+                } else {
                     $dataExpert = array_merge($dataExpert, ['user_id' => $request->id]);
                     Tutor::create($dataExpert);
                 }
@@ -172,32 +167,37 @@ class TutorController extends Controller
 
             return to_route('expertList')->with('Success Message', 'The expert info is updated successfully.');
 
-         }else{
+        } else {
             return back()->with('Success Message', 'No Data Changes. You need to edit data to update');
-         }
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+
+
+
     public function update($expertId)
     {
         $expert = User::select('users.*', 'tutors.*')
-        ->where('users.id', $expertId)
-        ->leftJoin('tutors', 'tutors.user_id', 'users.id')
-        ->first();
+            ->where('users.id', $expertId)
+            ->leftJoin('tutors', 'tutors.user_id', 'users.id')
+            ->first();
 
         return view('admin.updateExpert', compact('expert', 'expertId'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+
+
+
     public function destroy($expertId)
     {
         User::where('id', $expertId)->delete();
         return to_route('expertList')->with('Success Message', 'The expert is deleted successfully.');
     }
+
+
+
 
 
     public function addAptTime()
@@ -226,20 +226,20 @@ class TutorController extends Controller
 
 
         // condition
-        $imageChange = $request->image != null ? 1 : 0 ;     // 0
-        $nameChange = $request->name != $user->name ? 1 : 0 ;      // 0
-        $phoneChange = $request->phone != $user->phone ? 1 : 0 ;       //0
-        $addressChange = $request->address != $user->address ? 1 : 0 ;     //0
+        $imageChange = $request->image != null ? 1 : 0;     // 0
+        $nameChange = $request->name != $user->name ? 1 : 0;      // 0
+        $phoneChange = $request->phone != $user->phone ? 1 : 0;       //0
+        $addressChange = $request->address != $user->address ? 1 : 0;     //0
 
-        $changeCondition = $imageChange | $nameChange | $phoneChange | $addressChange ;
+        $changeCondition = $imageChange | $nameChange | $phoneChange | $addressChange;
 
         $data = [];
 
-        if($changeCondition){
+        if ($changeCondition) {
 
-            if($nameChange){
+            if ($nameChange) {
 
-                $data = array_merge($data , ['name' => $request->name]);
+                $data = array_merge($data, ['name' => $request->name]);
 
             }
             if ($phoneChange) {
@@ -254,14 +254,14 @@ class TutorController extends Controller
 
             if ($imageChange) {
 
-                $fileName = 'roar'.uniqid() . $request->file('image')->getClientOriginalName();
+                $fileName = 'roar' . uniqid() . $request->file('image')->getClientOriginalName();
 
-                $request->file('image')->move(public_path().'/admin/adminAndExpertProfileImg/', $fileName);
+                $request->file('image')->move(public_path() . '/admin/adminAndExpertProfileImg/', $fileName);
 
 
                 if ($user->image != null) {
-                    if (file_exists(public_path('admin/adminAndExpertProfileImg/' .$user->image))) {
-                        unlink( public_path("admin/adminAndExpertProfileImg/".$user->image) );
+                    if (file_exists(public_path('admin/adminAndExpertProfileImg/' . $user->image))) {
+                        unlink(public_path("admin/adminAndExpertProfileImg/" . $user->image));
                     }
                 }
 
@@ -270,15 +270,15 @@ class TutorController extends Controller
 
             // dd($data);
 
-            if($data != []){
+            if ($data != []) {
                 User::where('id', auth()->user()->id)->update($data);
             }
 
             return back()->with('Success Message', 'The admin info is updated successfully.');
 
-         }else{
+        } else {
             return back()->with('Success Message', 'No Data Changes. You need to edit data to update');
-         }
+        }
     }
 
     public function updateProfilePassword(Request $request)

@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function detail($expertId)
     {
         // Has to use user_id instead of id because it is of the tutors
@@ -20,17 +18,12 @@ class AppointmentController extends Controller
                     ->leftJoin('tutors', 'tutors.user_id', 'users.id')
                     ->first();
 
-        // dd($expert->toArray());
-
         // for the apt display
-
         $apt_detail_morning = Appointment::where('expert_id', $expertId )
                             ->where('status', 'available')
                             ->whereTime('aptTime', '<=', '12:00:00')
                             ->orderByRaw('TIME(aptTime) ASC')
                             ->get();
-
-        // dd($apt_detail_morning->toArray());
 
         $apt_detail_noon = Appointment::where('expert_id', $expertId )
                             ->where('status', 'available')
@@ -39,28 +32,23 @@ class AppointmentController extends Controller
                             ->orderByRaw('TIME(aptTime) ASC')
                             ->get();
 
-        // dd($apt_detail_noon->toArray());
-
         $apt_detail_night = Appointment::where('expert_id', $expertId )
                             ->where('status', 'available')
                             ->whereTime('aptTime', '>=', '18:00:00')
                             ->orderByRaw('TIME(aptTime) ASC')
                             ->get();
 
-        // dd($apt_detail_night->toArray());
-
 
         return view('expert.aptDetail', compact('expert', 'apt_detail_morning', 'apt_detail_noon', 'apt_detail_night'));
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+
+
+
     public function create(Request $request)
     {
-
-
         $request->validate([
             'aptTime' => 'required'
         ]);
@@ -76,17 +64,10 @@ class AppointmentController extends Controller
         return back()->with('Success Message', 'Your appointment is created successfully.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
+
+
+
     public function show()
     {
         $appointment = Appointment::where('expert_id', auth()->user()->id )
@@ -96,17 +77,10 @@ class AppointmentController extends Controller
         return view('expert.aptList', compact('appointment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Appointment $appointment)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+
+
     public function takeApt($aptId)
     {
 
@@ -114,6 +88,10 @@ class AppointmentController extends Controller
 
         return view('user.aptPayment', compact('appointment'));
     }
+
+
+
+
 
     public function aptPaymentComplete(Request $request){
 
@@ -145,18 +123,17 @@ class AppointmentController extends Controller
             // add the name to the db
             $data = array_merge($data, ['screenshot' => $fileName]);
 
-            // dd($data);
 
         Appointment::where('id', $request->aptId)->update($data);
-
 
         return to_route('userServices');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+
+
+    
     public function destroy(Appointment $appointment)
     {
         //

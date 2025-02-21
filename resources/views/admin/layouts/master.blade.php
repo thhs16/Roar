@@ -34,7 +34,8 @@
 <body>
     <div class="container-fluid position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -51,32 +52,35 @@
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
 
-                        <img class="rounded-circle me-lg-2" src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        <img class="rounded-circle me-lg-2"
+                            src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}"
+                            alt="" style="width: 40px; height: 40px;">
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{auth()->user()->name}}</h6>
-                        <span>{{auth()->user()->role}}</span>
+                        <h6 class="mb-0">{{ auth()->user()->name }}</h6>
+                        <span>{{ auth()->user()->role }}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('adminDashboard') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="{{ route('aptToCheck') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Pending Apt</a>
-                    <a href="{{ route('createService') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Create A Service </a>
-                    <a href="{{ route('serviceList') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Service's List </a>
-                    {{-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Buttons</a>
-                            <a href="typography.html" class="dropdown-item">Typography</a>
-                            <a href="element.html" class="dropdown-item">Other Elements</a>
-                        </div>
-                    </div> --}}
-                    <a href="{{ route('createCategory') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Create A Category</a>
-                    <a href="{{ route('categoryList') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Category's List</a>
+                    <a href="{{ route('adminDashboard') }}" class="nav-item nav-link active"><i
+                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{ route('aptToCheck') }}" class="nav-item nav-link"><i
+                            class="fa fa-tachometer-alt me-2"></i>Pending Apt</a>
+                    <a href="{{ route('createService') }}" class="nav-item nav-link"><i
+                            class="fa fa-tachometer-alt me-2"></i>Create A Service </a>
+                    <a href="{{ route('serviceList') }}" class="nav-item nav-link"><i
+                            class="fa fa-tachometer-alt me-2"></i>Service's List </a>
+                    <a href="{{ route('createCategory') }}" class="nav-item nav-link"><i
+                            class="fa fa-th me-2"></i>Create A Category</a>
+                    <a href="{{ route('categoryList') }}" class="nav-item nav-link"><i
+                            class="fa fa-th me-2"></i>Category's List</a>
 
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Speaking Experts</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="far fa-file-alt me-2"></i>Speaking Experts</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('createExperts') }}" class="dropdown-item">Adding Expert's Info</a>
                             <a href="{{ route('expertList') }}" class="dropdown-item">Experts' List</a>
@@ -84,10 +88,12 @@
                     </div>
 
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Account Creation </a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="far fa-file-alt me-2"></i>Account Creation </a>
                         <div class="dropdown-menu bg-transparent border-0">
                             @if (auth()->user()->role == 'superAdmin')
-                                <a href="{{ route('createAdmin') }}" class="dropdown-item">Create an Admin & Expert Acc</a>
+                                <a href="{{ route('createAdmin') }}" class="dropdown-item">Create an Admin & Expert
+                                    Acc</a>
                             @endif
                             <a href="{{ route('adminList') }}" class="dropdown-item">Admin List</a>
                             <a href="{{ route('userList') }}" class="dropdown-item">User List</a>
@@ -112,11 +118,13 @@
 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">{{auth()->user()->name}}</span>
+                            <img class="rounded-circle me-lg-2"
+                                src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}"
+                                alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">{{ auth()->user()->name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{{ route('adminProfile')}} " class="dropdown-item">My Profile</a>
+                            <a href="{{ route('adminProfile') }} " class="dropdown-item">My Profile</a>
                             {{-- <a href="#" class="dropdown-item">Settings</a> --}}
                             <a href="{{ route('logout') }}" class="dropdown-item">Log Out</a>
                         </div>
@@ -175,19 +183,19 @@
     <script>
         setTimeout(function() {
             let msg = document.getElementById('sessionMessage');
-            if (msg){
-               msg.remove();
+            if (msg) {
+                msg.remove();
             }
         }, 2000);
     </script>
 
     {{-- Image Preview | product --}}
     <script>
-        function loadFile(event){
+        function loadFile(event) {
 
             var reader = new FileReader();
 
-            reader.onload = function(){
+            reader.onload = function() {
                 var output = document.getElementById('output');
                 output.src = reader.result;
             }

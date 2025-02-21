@@ -19,7 +19,8 @@
 
                                 <!-- User ID -->
                                 <div class="form-floating mb-3">
-                                    <input name="userId" value="{{ old('user_id') }}" type="number" class="form-control @error('user_id') is-invalid @enderror" placeholder="User ID">
+                                    <input name="userId" value="{{ old('user_id') }}" type="number"
+                                        class="form-control @error('user_id') is-invalid @enderror" placeholder="User ID">
                                     <label>User ID</label>
                                     @error('user_id')
                                         <small class="text-danger">{{ $message }}</small>
@@ -28,7 +29,9 @@
 
                                 <!-- Display Name -->
                                 <div class="form-floating mb-3">
-                                    <input name="displayName" value="{{ old('displayName') }}" type="text" class="form-control @error('displayName') is-invalid @enderror" placeholder="Display Name">
+                                    <input name="displayName" value="{{ old('displayName') }}" type="text"
+                                        class="form-control @error('displayName') is-invalid @enderror"
+                                        placeholder="Display Name">
                                     <label>Display Name</label>
                                     @error('displayName')
                                         <small class="text-danger">{{ $message }}</small>
@@ -37,7 +40,8 @@
 
                                 <!-- About -->
                                 <div class="form-floating mb-3">
-                                    <textarea name="about" class="form-control @error('about') is-invalid @enderror" placeholder="About" style="height: 100px;">{{ old('about') }}</textarea>
+                                    <textarea name="about" class="form-control @error('about') is-invalid @enderror" placeholder="About"
+                                        style="height: 100px;">{{ old('about') }}</textarea>
                                     <label>About</label>
                                     @error('about')
                                         <small class="text-danger">{{ $message }}</small>
@@ -46,7 +50,9 @@
 
                                 <!-- Trained Students -->
                                 <div class="form-floating mb-3">
-                                    <input name="trainedStudent" value="{{ old('trainedStudent') }}" type="number" class="form-control @error('trainedStudent') is-invalid @enderror" placeholder="Trained Students">
+                                    <input name="trainedStudent" value="{{ old('trainedStudent') }}" type="number"
+                                        class="form-control @error('trainedStudent') is-invalid @enderror"
+                                        placeholder="Trained Students">
                                     <label>Trained Students</label>
                                     @error('trainedStudent')
                                         <small class="text-danger">{{ $message }}</small>
@@ -57,7 +63,9 @@
                             <div class="col-md-6">
                                 <!-- Facebook -->
                                 <div class="form-floating mb-3">
-                                    <input name="facebookAcc" value="{{ old('facebookAcc') }}" type="url" class="form-control @error('facebookAcc') is-invalid @enderror" placeholder="Facebook URL">
+                                    <input name="facebookAcc" value="{{ old('facebookAcc') }}" type="url"
+                                        class="form-control @error('facebookAcc') is-invalid @enderror"
+                                        placeholder="Facebook URL">
                                     <label>Facebook</label>
                                     @error('facebookAcc')
                                         <small class="text-danger">{{ $message }}</small>
@@ -66,7 +74,9 @@
 
                                 <!-- Instagram -->
                                 <div class="form-floating mb-3">
-                                    <input name="instagramAcc" value="{{ old('instagramAcc') }}" type="url" class="form-control @error('instagramAcc') is-invalid @enderror" placeholder="Instagram URL">
+                                    <input name="instagramAcc" value="{{ old('instagramAcc') }}" type="url"
+                                        class="form-control @error('instagramAcc') is-invalid @enderror"
+                                        placeholder="Instagram URL">
                                     <label>Instagram</label>
                                     @error('instagramAcc')
                                         <small class="text-danger">{{ $message }}</small>
@@ -75,7 +85,9 @@
 
                                 <!-- Twitter -->
                                 <div class="form-floating mb-3">
-                                    <input name="twitterAcc" value="{{ old('twitterAcc') }}" type="url" class="form-control @error('twitterAcc') is-invalid @enderror" placeholder="Twitter URL">
+                                    <input name="twitterAcc" value="{{ old('twitterAcc') }}" type="url"
+                                        class="form-control @error('twitterAcc') is-invalid @enderror"
+                                        placeholder="Twitter URL">
                                     <label>Twitter</label>
                                     @error('twitterAcc')
                                         <small class="text-danger">{{ $message }}</small>
@@ -84,7 +96,9 @@
 
                                 <!-- LinkedIn -->
                                 <div class="form-floating mb-3">
-                                    <input name="linkedinAcc" value="{{ old('linkedinAcc') }}" type="url" class="form-control @error('linkedinAcc') is-invalid @enderror" placeholder="LinkedIn URL">
+                                    <input name="linkedinAcc" value="{{ old('linkedinAcc') }}" type="url"
+                                        class="form-control @error('linkedinAcc') is-invalid @enderror"
+                                        placeholder="LinkedIn URL">
                                     <label>LinkedIn</label>
                                     @error('linkedinAcc')
                                         <small class="text-danger">{{ $message }}</small>

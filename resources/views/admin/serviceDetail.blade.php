@@ -16,29 +16,30 @@
                         @csrf
                         <div class="row">
                             <div class="mb-3 col-4">
-                                <img src="{{ asset('serviceImages/'.$service->image) }}" class=" img-thumbnail" alt="">
+                                <img src="{{ asset('serviceImages/' . $service->image) }}" class=" img-thumbnail"
+                                    alt="">
 
                             </div>
 
                             <div class="col-8">
                                 <div class="form-floating mb-3">
-                                    <h2>{{$service->title}}</h2>
+                                    <h2>{{ $service->title }}</h2>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <p>Type : {{$service->type}}</p>
+                                    <p>Type : {{ $service->type }}</p>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <p>Category : {{$service->category_name}}</p>
+                                    <p>Category : {{ $service->category_name }}</p>
                                 </div>
 
                                 <div class="input-group mb-3">
-                                    <p>Fees : {{$service->fees}}</p>
+                                    <p>Fees : {{ $service->fees }}</p>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <p>{{$service->description}}</p>
+                                    <p>{{ $service->description }}</p>
                                 </div>
                             </div>
 

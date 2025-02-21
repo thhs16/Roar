@@ -28,9 +28,10 @@ use App\Http\Controllers\AppointmentController;
 
 require __DIR__.'/auth.php';
 
-    // Socialite
-    Route::get('/auth/{provider}/redirect', [ProviderController::class,'redirect']);
-    Route::get('/auth/{provider}/callback', [ProviderController::class,'callback']);
+    // // Socialite
+    // Route::get('/auth/{provider}/redirect', [ProviderController::class,'redirect']);
+    // Route::get('/auth/{provider}/callback', [ProviderController::class,'callback']);
+
 
 
 

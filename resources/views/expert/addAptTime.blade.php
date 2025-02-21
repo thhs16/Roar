@@ -1,12 +1,11 @@
 @extends('expert.layouts.master')
 
 @section('content')
-
-@if(session('Success Message'))
-    <h6 id="sessionMessage" class="alert alert-success">
-        {{ session('Success Message') }}
-    </h6>
-@endif
+    @if (session('Success Message'))
+        <h6 id="sessionMessage" class="alert alert-success">
+            {{ session('Success Message') }}
+        </h6>
+    @endif
 
     <!-- Sign Up Start -->
     <div class="container-fluid">
@@ -25,11 +24,13 @@
 
                             <div class="col-6">
                                 <div class="form-floating mb-3">
-                                    <input name="aptTime" value="{{ old('aptTime')}}"  type="datetime-local" class="form-control @error('aptTime') is-invalid @enderror" id="floatingText" placeholder="jhondoe">
+                                    <input name="aptTime" value="{{ old('aptTime') }}" type="datetime-local"
+                                        class="form-control @error('aptTime') is-invalid @enderror" id="floatingText"
+                                        placeholder="jhondoe">
                                     <label for="floatingText">Appointment Date</label>
-                                        @error('aptTime')
-                                            <small class="text-danger">{{$message}}</small>
-                                        @enderror
+                                    @error('aptTime')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
 
@@ -53,5 +54,3 @@
 {{--  Time --}}
 {{--  Type --}}
 {{--  Apt Tutor --}}
-
-

@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $userAppointment = Appointment::where('user_id', auth()->user()->id)->orderByRaw("FIELD(status, 'pending', 'booked')")->paginate(2);
         // dd($userAppointment->toArray());
-        return view('user.userServices', compact('userAppointment') );
+        return view('user.userServices', compact('userAppointment'));
     }
 
     /**
@@ -36,7 +36,6 @@ class UserController extends Controller
         // dd($request->all());
 
         $validation = $request->validate([
-            'name' => 'required',
             'image' => 'mimes:jpeg,png,jpg,gif'
         ]);
 
@@ -44,20 +43,26 @@ class UserController extends Controller
 
 
         // condition
-        $imageChange = $request->image != null ? 1 : 0 ;     // 0
-        $nameChange = $request->name != $user->name ? 1 : 0 ;      // 0
-        $phoneChange = $request->phone != $user->phone ? 1 : 0 ;       //0
-        $addressChange = $request->address != $user->address ? 1 : 0 ;     //0
+        $imageChange = $request->image != null ? 1 : 0;     // 0
+        $nameChange = $request->name != $user->name ? 1 : 0;      // 0
+        $nickNameChange = $request->nickname != $user->nickname ? 1 : 0;      // 0
+        $phoneChange = $request->phone != $user->phone ? 1 : 0;       //0
+        $addressChange = $request->address != $user->address ? 1 : 0;     //0
 
-        $changeCondition = $imageChange | $nameChange | $phoneChange | $addressChange ;
+        $changeCondition = $imageChange | $nameChange | $nickNameChange | $phoneChange | $addressChange;
 
         $data = [];
 
-        if($changeCondition){
+        if ($changeCondition) {
 
-            if($nameChange){
+            if ($nameChange) {
 
-                $data = array_merge($data , ['name' => $request->name]);
+                $data = array_merge($data, ['name' => $request->name]);
+
+            }
+            if ($nickNameChange) {
+
+                $data = array_merge($data, ['nickname' => $request->nickname]);
 
             }
             if ($phoneChange) {
@@ -72,13 +77,13 @@ class UserController extends Controller
 
             if ($imageChange) {
 
-                $fileName = 'roar'.uniqid() . $request->file('image')->getClientOriginalName();
+                $fileName = 'roar' . uniqid() . $request->file('image')->getClientOriginalName();
 
-                $request->file('image')->move(public_path().'/user/accImages/', $fileName);
+                $request->file('image')->move(public_path() . '/user/accImages/', $fileName);
 
 
                 if ($user->image != null) {
-                    unlink( public_path("user/accImages/".$user->image) );
+                    unlink(public_path("user/accImages/" . $user->image));
                 }
 
                 $data = array_merge($data, ['image' => $fileName]);
@@ -86,20 +91,18 @@ class UserController extends Controller
 
             // dd($data);
 
-            if($data != []){
+            if ($data != []) {
                 User::where('id', auth()->user()->id)->update($data);
             }
 
             return back()->with('Success Message', 'The expert info is updated successfully.');
 
-         }else{
+        } else {
             return back()->with('Success Message', 'No Data Changes. You need to edit data to update');
-         }
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function updateProfilePassword(Request $request)
     {
         // dd($request->all());
@@ -118,29 +121,5 @@ class UserController extends Controller
         ]);
 
         return redirect()->back()->with('Pw Success', 'Password changed successfully!');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 }

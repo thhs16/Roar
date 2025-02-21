@@ -54,8 +54,8 @@
                         </table>
                     </div> <!-- End Table Responsive -->
 
-                {{-- pagination --}}
-                <span class=" d-flex justify-content-end">{{ $pending_appointment->links() }}</span>
+                    {{-- pagination --}}
+                    <span class=" d-flex justify-content-end">{{ $pending_appointment->links() }}</span>
                 </div>
 
             </div>

@@ -34,7 +34,8 @@
 <body>
     <div class="container-fluid position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -50,19 +51,29 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        <img class="rounded-circle"
+                            src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}"
+                            alt="" style="width: 40px; height: 40px;">
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{auth()->user()->name}}</h6>
-                        <span>{{auth()->user()->role}}</span>
+                        <h6 class="mb-0">{{ auth()->user()->name }}</h6>
+                        <span>{{ auth()->user()->role }}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
                     {{-- expertDashboard --}}
-                    <a href="{{ route('expertDashboard') }}" class="nav-item nav-link {{ Route::is('expertDashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="{{ route('addAptTime') }}" class="nav-item nav-link {{ Route::is('addAptTime') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Add Appointments </a>
-                    <a href="{{ route('aptList') }}" class="nav-item nav-link {{ Route::is('aptList') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Appointment List </a>
+                    <a href="{{ route('expertDashboard') }}"
+                        class="nav-item nav-link {{ Route::is('expertDashboard') ? 'active' : '' }}"><i
+                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{ route('addAptTime') }}"
+                        class="nav-item nav-link {{ Route::is('addAptTime') ? 'active' : '' }}"><i
+                            class="fa fa-tachometer-alt me-2"></i>Add Appointments </a>
+                    <a href="{{ route('aptList') }}"
+                        class="nav-item nav-link {{ Route::is('aptList') ? 'active' : '' }}"><i
+                            class="fa fa-tachometer-alt me-2"></i>Appointment List </a>
                 </div>
             </nav>
         </div>
@@ -82,13 +93,15 @@
 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">{{auth()->user()->name}}</span>
+                            <img class="rounded-circle me-lg-2"
+                                src="{{ auth()->user()->image ? asset('admin/adminAndExpertProfileImg/' . auth()->user()->image) : asset('admin/img/user.jpg') }}"
+                                alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">{{ auth()->user()->name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{{ route('expertProfile')}} " class="dropdown-item">My Profile</a>
+                            <a href="{{ route('expertProfile') }} " class="dropdown-item">My Profile</a>
                             {{-- <a href="#" class="dropdown-item">Settings</a> --}}
-                            <a href="{{ route('logout')}}" class="dropdown-item">Log Out</a>
+                            <a href="{{ route('logout') }}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -145,19 +158,19 @@
     <script>
         setTimeout(function() {
             let msg = document.getElementById('sessionMessage');
-            if (msg){
-               msg.remove();
+            if (msg) {
+                msg.remove();
             }
         }, 2000);
     </script>
 
     {{-- Image Preview | product --}}
     <script>
-        function loadFile(event){
+        function loadFile(event) {
 
             var reader = new FileReader();
 
-            reader.onload = function(){
+            reader.onload = function() {
                 var output = document.getElementById('output');
                 output.src = reader.result;
             }
