@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function userServices()
     {
-        $userAppointment = Appointment::where('user_id', auth()->user()->id)->orderByRaw("FIELD(status, 'pending', 'booked')")->get();
+        $userAppointment = Appointment::where('user_id', auth()->user()->id)->orderByRaw("FIELD(status, 'pending', 'booked')")->paginate(2);
         // dd($userAppointment->toArray());
         return view('user.userServices', compact('userAppointment') );
     }

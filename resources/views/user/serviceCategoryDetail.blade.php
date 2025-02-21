@@ -42,7 +42,10 @@
 
             </div>
 
+
         </div>
+        {{-- pagination --}}
+        <span class=" d-flex justify-content-center">{{ $service_category->links() }}</span>
     </section><!-- /Pricing Section -->
 
 @endsection

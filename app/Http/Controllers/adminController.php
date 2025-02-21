@@ -78,7 +78,7 @@ class adminController extends Controller
 
     // categoryList admin
     public function categoryList(){
-        $category = Category::select('id', 'name')->get();
+        $category = Category::select('id', 'name')->paginate(2);
 
         return view('admin.categoryList', compact('category'));
     }
@@ -157,17 +157,17 @@ class adminController extends Controller
     }
 
     public function adminList(){
-        $adminList = User::where('role', 'superAdmin')->orWhere('role', 'admin')->get();
+        $adminList = User::where('role', 'superAdmin')->orWhere('role', 'admin')->paginate(2);
         return view('admin.adminList', compact('adminList'));
     }
 
     public function userList(){
-        $userList = User::where('role', 'user')->get();
+        $userList = User::where('role', 'user')->paginate(5);
         return view('admin.userList', compact('userList'));
     }
 
     public function aptToCheck(){
-        $pending_appointment = Appointment::where('status', 'pending')->get();
+        $pending_appointment = Appointment::where('status', 'pending')->paginate(5);
 
         return view('admin.aptToCheck', compact('pending_appointment'));
     }

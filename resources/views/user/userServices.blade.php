@@ -42,7 +42,10 @@
 
                     </tbody>
                 </table>
+                {{-- pagination --}}
+            <span class=" d-flex justify-content-center">{{ $userAppointment->links() }}</span>
             </div>
+
         </div>
     </div>
 </section>

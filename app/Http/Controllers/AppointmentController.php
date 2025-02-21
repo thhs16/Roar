@@ -91,7 +91,7 @@ class AppointmentController extends Controller
     {
         $appointment = Appointment::where('expert_id', auth()->user()->id )
                     ->orderByRaw("FIELD(status, 'booked', 'available')")
-                    ->get();
+                    ->paginate(2);
 
         return view('expert.aptList', compact('appointment'));
     }

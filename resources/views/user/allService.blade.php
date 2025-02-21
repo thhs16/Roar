@@ -7,7 +7,7 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-          <h2>{{$category_name}}</h2>
+          <h2>All Services</h2>
           {{-- <p>Let us provide you with the best English Speaking Practice Experience.</p> --}}
         </div><!-- End Section Title -->
 
@@ -15,12 +15,12 @@
 
           <div class="row gy-4">
 
-            @foreach ($service_category as $service_item)
+            @foreach ($service as $service_item)
 
             <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100" >
                 <div class="pricing-item featured">
-                  {{-- <p class="popular">{{$service_item->category_id}}</p> --}}
-                  <h3 class="">{{$service_item->title}}</h3>
+                  <p class="popular" >{{$service_item->name}}</p>
+                  <h3 class="mt-3">{{$service_item->title}}</h3>
                   <img src="{{ asset('serviceImages/'.$service_item->image) }}" class="mt-3 mb-4 img-fluid rounded" alt="">
                   <p class="description">{{ $truncated = Str::limit($service_item->description, 100, ' ...'); }}</p>
                   <ul>
@@ -41,7 +41,8 @@
 
 
             </div>
-
+            {{-- pagination --}}
+            <span class=" d-flex justify-content-end">{{ $service->links() }}</span>
         </div>
     </section><!-- /Pricing Section -->
 

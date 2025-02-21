@@ -11,9 +11,7 @@ use App\Models\Appointment;
 
 class TutorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function expertDashboard()
     {
         $booked_apt_count = Appointment::where('status', 'booked')
@@ -36,17 +34,6 @@ class TutorController extends Controller
         return view('admin.createExperts');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
@@ -74,12 +61,10 @@ class TutorController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show()
     {
-        $expertList = User::where('role', 'expert')->get();
+        $expertList = User::where('role', 'expert')->paginate(2);
         return view('admin.expertList', compact('expertList'));
     }
 
@@ -169,9 +154,6 @@ class TutorController extends Controller
 
                 $data = array_merge($dataUser, ['image' => $fileName]);
             }
-
-            // dd($dataUser);
-            // dd($dataExpert);
 
             if($dataUser != []){
                 User::where('id', $request->id)->update($dataUser);
@@ -301,7 +283,7 @@ class TutorController extends Controller
 
     public function updateProfilePassword(Request $request)
     {
-        // dd($request->all());
+
 
         $request->validate([
             'oldPassword' => 'required',

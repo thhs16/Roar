@@ -41,7 +41,7 @@ class ServiceController extends Controller
     }
 
     public function serviceList(){
-    $service = Service::get();
+    $service = Service::paginate(2);
 
         return view('admin.serviceList', compact('service'));
     }
@@ -230,7 +230,7 @@ class ServiceController extends Controller
                         $query->where('title', 'LIKE', "%{$keyword}%") // Search in service name
                     ->orWhere('description', 'LIKE', "%{$keyword}%"); // Search in description
                     })
-                    ->get();
+                    ->paginate(1);
 
         $category_name = Category::select('name')->where('id', $categoryId)->first();
 
@@ -242,23 +242,13 @@ class ServiceController extends Controller
 
     }
 
-    // public function searchService(Request $request){
+    public function allServicesPg(){
+        $service = Service::select('services.*', 'categories.*')
+        ->leftJoin('categories', 'categories.id', 'services.category_id')
+        ->paginate(6);
 
-    //     // dd($request->all());
-    //     $keyword = $request->searchKey;
 
-    //     $service_category = Service::where('category_id', $request->categoryId) // Filter by category
-    //                 ->where(function($query) use ($keyword) {
-    //         $query->where('title', 'LIKE', "%{$keyword}%") // Search in service name
-    //               ->orWhere('description', 'LIKE', "%{$keyword}%"); // Search in description
-    //     })
-    //     ->get();
 
-    //     $categoryId = $request->categoryId;
-
-    //     // dd($service_category->toArray());
-
-    //     return view('user.serviceCategoryDetail', compact('service_category', 'categoryId'));
-
-    // }
+        return view('user.allService', compact('service'));
+    }
 }

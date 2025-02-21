@@ -82,13 +82,14 @@
 
         <div class="container">
 
+
           <div class="row gy-4">
             @foreach ($service as $service_item)
 
             <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100" >
                 <div class="pricing-item featured">
                   <p class="popular">{{$service_item->name}}</p>
-                  <h3 class="">{{$service_item->title}}</h3>
+                  <h3 class="mt-3">{{$service_item->title}}</h3>
                   <img src="{{ asset('serviceImages/'.$service_item->image) }}" class="mt-3 mb-4 img-fluid rounded" alt="">
                   <p class="description">{{ $truncated = Str::limit($service_item->description, 100, ' ...'); }}</p>
                   <ul>
@@ -109,7 +110,8 @@
 
 
             </div>
-
+            {{--  All services Button--}}
+            <a href="{{ route('allServicesPg')}}" class=" d-flex justify-content-center m-2 "><div class="btn btn-outline-warning">View All Services</div></a>
         </div>
     </section><!-- /Pricing Section -->
 

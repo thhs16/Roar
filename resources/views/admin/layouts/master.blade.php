@@ -84,10 +84,10 @@
                     </div>
 
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Admin & User List </a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Account Creation </a>
                         <div class="dropdown-menu bg-transparent border-0">
                             @if (auth()->user()->role == 'superAdmin')
-                                <a href="{{ route('createAdmin') }}" class="dropdown-item">Create an Admin</a>
+                                <a href="{{ route('createAdmin') }}" class="dropdown-item">Create an Admin & Expert Acc</a>
                             @endif
                             <a href="{{ route('adminList') }}" class="dropdown-item">Admin List</a>
                             <a href="{{ route('userList') }}" class="dropdown-item">User List</a>

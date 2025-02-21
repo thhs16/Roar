@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -22,12 +23,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware('web') // Apply the web middleware group
-        ->group(base_path('routes/adminRoute.php')); // Load admin.php routes
+        Route::middleware('web')->group(function () {
+            require base_path('routes/adminRoute.php');
+            require base_path('routes/userRoute.php');
+            require base_path('routes/expertRoute.php');
+        });
 
         // Only pass data to views inside 'layouts' folder
         View::composer('user.*', function ($view) {
             $view->with('category', Category::all());
         });
-        }
+
+
+        Paginator::useBootstrap();
+    }
 }

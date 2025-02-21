@@ -42,6 +42,9 @@
 
                 </tbody>
             </table>
+
+            {{-- pagination --}}
+            <span class=" d-flex justify-content-end">{{ $category->links() }}</span>
         </div>
     </div>
 </div>

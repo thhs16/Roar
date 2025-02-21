@@ -43,7 +43,7 @@
                              </div>
 
                              <div class="col-md-12">
-                                <button type="button" class="col-12 btn btn-close-white border-dark">Login with Google <i class="fa-brands fa-google"></i></button>
+                                <a href="{{ url('/auth/github/redirect') }}" type="button" class="col-12 btn btn-close-white border-dark">Login with Github <i class="fa-brands fa-google"></i></a>
                              </div>
 
                              <div class="col-md-12 text-center">
