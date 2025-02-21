@@ -18,7 +18,7 @@
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
+:root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #3d4348; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #3e5055; /* Color for headings, subheadings and title throughout the website */
@@ -178,10 +178,10 @@ h6 {
 
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
-  color: var(--contrast-color);
-  background: var(--accent-color);
+  color: var(--default-color);
+  /* background: var(--accent-color); */
   font-size: 14px;
-  padding: 8px 25px;
+  /* padding: 8px 25px; */
   margin: 0 0 0 30px;
   border-radius: 50px;
   transition: 0.3s;
@@ -189,8 +189,8 @@ h6 {
 
 .header .btn-getstarted:hover,
 .header .btn-getstarted:focus:hover {
-  color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  color: var(--default-color);
+  /* background: color-mix(in srgb, var(--accent-color), transparent 15%); */
 }
 
 @media (max-width: 1200px) {

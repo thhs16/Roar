@@ -7,6 +7,7 @@ use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AppointmentController;
 
+Route::middleware(['admin', 'auth'])->group(function () {
 
     Route::get('admin/dashboard', [adminController::class, 'adminDashboard'])
             ->name('adminDashboard');
@@ -56,7 +57,7 @@ use App\Http\Controllers\AppointmentController;
     Route::get('admin/approveAptAdmin/{aptId}', [adminController::class, 'approveAptAdmin'])
             ->name('approveAptAdmin');
 
-    // Experts
+    // Admin for Expert
     Route::get('admin/experts/create', [TutorController::class, 'index'])
             ->name('createExperts');
 
@@ -88,7 +89,18 @@ use App\Http\Controllers\AppointmentController;
     Route::get('admin/userList', [adminController::class, 'userList'])
             ->name('userList');
 
+    Route::get('admin/profile', [adminController::class, 'profile'])->name('adminProfile');
+
+    // adminProfileUpdate
+    Route::post('admin/profile/update', [adminController::class, 'profileUpdate'])->name('adminProfileUpdate');
+
+    // updateProfilePassword
+    Route::post('admin/profile/passwordUpdate', [adminController::class, 'updateProfilePassword'])->name('adminUpdateProfilePassword');
+});
+
+
     // expert
+Route::middleware(['expert', 'auth'])->group(function () {
     Route::get('expert/dashboard', [TutorController::class, 'expertDashboard'])
             ->name('expertDashboard');
 
@@ -101,16 +113,23 @@ use App\Http\Controllers\AppointmentController;
     Route::get('expert/apt/list', [AppointmentController::class, 'show'])
             ->name('aptList');
 
-    Route::get('expert/apt/detail/{expertId}', [AppointmentController::class, 'detail'])
-            ->name('aptDetail');
+    // Route::get('expert/apt/detail/{expertId}', [AppointmentController::class, 'detail'])
+    //         ->name('aptDetail');
 
-    Route::get('expert/apt/take/{aptId}', [AppointmentController::class, 'takeApt'])
-            ->name('takeApt'); // aptStatus change for the admin to check
+    // Route::get('expert/apt/take/{aptId}', [AppointmentController::class, 'takeApt'])
+    //         ->name('takeApt'); // aptStatus change for the admin to check
 
-    Route::post('expert/apt/complete', [AppointmentController::class, 'aptPaymentComplete'])
-    ->name('aptPaymentComplete');
+    // Route::post('expert/apt/complete', [AppointmentController::class, 'aptPaymentComplete'])
+    // ->name('aptPaymentComplete');
 
-    // userServices
-    Route::get('/myServices', [UserController::class, 'userServices'])
-    ->name('userServices');
+    Route::get('expert/profile', [TutorController::class, 'profile'])->name('expertProfile');
+
+    // expertProfileUpdate
+    Route::post('expert/profile/update', [TutorController::class, 'profileUpdate'])->name('expertProfileUpdate');
+
+    // updateProfilePassword
+    Route::post('expert/profile/passwordUpdate', [TutorController::class, 'updateProfilePassword'])->name('expertUpdateProfilePassword');
+});
+
+
 

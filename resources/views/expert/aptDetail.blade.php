@@ -36,10 +36,10 @@
                 <div class="service-box">
                   <h4>Get To Know Me</h4>
                   <div class="services-list">
-                    <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Facebook Account</span></a>
-                    <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Instagram Account</span></a>
-                    <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Twitter Account</span></a>
-                    <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Linkedin Account</span></a>
+                    <a href="{{$expert->facebook_acc}}"><i class="bi bi-arrow-right-circle"></i><span>Facebook Account</span></a>
+                    <a href="{{$expert->instagram_acc}}"><i class="bi bi-arrow-right-circle"></i><span>Instagram Account</span></a>
+                    <a href="{{$expert->twitter_acc}}"><i class="bi bi-arrow-right-circle"></i><span>Twitter Account</span></a>
+                    <a href="{{$expert->linkedin_acc}}"><i class="bi bi-arrow-right-circle"></i><span>Linkedin Account</span></a>
                   </div>
                 </div><!-- End Services List -->
 
@@ -60,15 +60,15 @@
               </div>
 
               <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-                <img src="{{ asset('admin/adminAndExpertProfileImg/'.$expert->image) }}" alt="" class="img-fluid services-img">
+                <img src="{{ $expert->image ? asset('admin/adminAndExpertProfileImg/' . $expert->image) : asset('admin/img/user.jpg') }}" alt="" class="img-fluid services-img " style="height: 300px">
                 <h3>{{ $expert->name }}</h3>
-                <p>
+                <p></p>
                     {{ $expert->about }}
                 </p>
                 <ul>
-                    <li><i class="bi bi-check-circle"></i> <span>Ratings : </span></li>
+                    {{-- <li><i class="bi bi-check-circle"></i> <span>Ratings : </span></li> --}}
                   <li><i class="bi bi-check-circle"></i> <span>Trained Student : {{ $expert->trained_student }}</span></li>
-                  <li><div class="btn btn-primary">Rate this Expert</div></li>
+                  {{-- <li><div class="btn btn-primary">Rate this Expert</div></li> --}}
 
                 </ul>
 
@@ -79,7 +79,7 @@
                         <h3><i class="fa fa-user"></i> Morning Schedule</h3>
                         <hr>
                         @foreach ($apt_detail_morning as $apt_detail_morning_item)
-                            {{$apt_detail_morning_item->id}}
+
                             <a href="{{ route('takeApt', $apt_detail_morning_item->id)}}" class="btn btn-success m-1">{{ \Carbon\Carbon::parse($apt_detail_morning_item->aptTime)->format('h:i A - d M Y ( l )') }}</a>
                         @endforeach
 
@@ -90,7 +90,7 @@
                         <h3><i class="fa fa-user"></i> Noon Schedule</h3>
                         <hr>
                         @foreach ($apt_detail_noon as $apt_detail_noon_item)
-                        {{$apt_detail_noon_item->id}}
+
                         <a href="{{ route('takeApt', $apt_detail_noon_item->id)}}" class="btn btn-success m-1">{{ \Carbon\Carbon::parse($apt_detail_noon_item->aptTime)->format('h:i A - d M Y ( l )') }}</a>
                         @endforeach
                     </div>
@@ -103,7 +103,7 @@
                         <h3><i class="fa fa-user"></i> Night Schedule</h3>
                         <hr>
                         @foreach ($apt_detail_night as $apt_detail_night_item)
-                        {{$apt_detail_night_item->id}}
+
                         <a href="{{ route('takeApt', $apt_detail_night_item->id)}}" class="btn btn-success m-1">{{ \Carbon\Carbon::parse($apt_detail_night_item->aptTime)->format('h:i A - d M Y ( l )') }}</a>
 
                         @endforeach

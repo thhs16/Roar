@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('display_name');
             $table->text('about');
-            $table->string('trained_student')->nullable();
+            $table->string('trained_student')->default('0');
             $table->string('facebook_acc')->nullable();
             $table->string('instagram_acc')->nullable();
             $table->string('twitter_acc')->nullable();

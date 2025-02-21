@@ -36,7 +36,7 @@
                             <td>{{$userList_item->email}}</td>
                             <td>{{$userList_item->phone}}</td>
                             <td>
-                                <a href="{{ route('updateCategoryPage', $userList_item->id ) }}" class="btn btn-primary">Update</a>
+
                                 <a href="{{ route('categoryDelete', $userList_item->id ) }}"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>

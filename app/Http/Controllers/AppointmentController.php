@@ -25,6 +25,7 @@ class AppointmentController extends Controller
         // for the apt display
 
         $apt_detail_morning = Appointment::where('expert_id', $expertId )
+                            ->where('status', 'available')
                             ->whereTime('aptTime', '<=', '12:00:00')
                             ->orderByRaw('TIME(aptTime) ASC')
                             ->get();
@@ -32,6 +33,7 @@ class AppointmentController extends Controller
         // dd($apt_detail_morning->toArray());
 
         $apt_detail_noon = Appointment::where('expert_id', $expertId )
+                            ->where('status', 'available')
                             ->whereTime('aptTime', '>=', '12:00:00')
                             ->whereTime('aptTime', '<', '18:00:00')
                             ->orderByRaw('TIME(aptTime) ASC')
@@ -40,6 +42,7 @@ class AppointmentController extends Controller
         // dd($apt_detail_noon->toArray());
 
         $apt_detail_night = Appointment::where('expert_id', $expertId )
+                            ->where('status', 'available')
                             ->whereTime('aptTime', '>=', '18:00:00')
                             ->orderByRaw('TIME(aptTime) ASC')
                             ->get();
@@ -86,7 +89,9 @@ class AppointmentController extends Controller
      */
     public function show()
     {
-        $appointment = Appointment::where('expert_id', auth()->user()->id )->get();
+        $appointment = Appointment::where('expert_id', auth()->user()->id )
+                    ->orderByRaw("FIELD(status, 'booked', 'available')")
+                    ->get();
 
         return view('expert.aptList', compact('appointment'));
     }
@@ -145,7 +150,7 @@ class AppointmentController extends Controller
         Appointment::where('id', $request->aptId)->update($data);
 
 
-        return back();
+        return to_route('userServices');
 
     }
 

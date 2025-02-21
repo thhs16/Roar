@@ -12,10 +12,12 @@
         <div class="d-flex flex-column justify-content-center align-items-center">
           <h1 data-aos="fade-up">Welcome to <span>Roar</span></h1>
           <p class="mt-3" data-aos="fade-up" data-aos-delay="100">You do not need to be silent. You just have to roar.<br></p>
+
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#about" class="btn-get-started">Login</a>
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <a href="{{ route('userProfile') }}" class="btn-get-started">My Profile</a>
+            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>What is Roar ?</span></a>
           </div>
+
           <img src="{{ asset('img/main_photo.png') }}" class="img-fluid hero-img" alt="" data-aos="zoom-out" data-aos-delay="300">
         </div>
     </div>
@@ -34,7 +36,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
               <div>
-                <h2>10</h2>
+                <h2>{{$expert_count}}</h2>
                 <h4 class="title"><a href="#" class="stretched-link">Speaking Experts</a></h4>
 
               </div>
@@ -47,7 +49,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
               <div>
-                <h2>100</h2>
+                <h2>{{$student_count}}</h2>
                 <h4 class="title">Satisfied Students</h4>
               </div>
             </div>
@@ -57,7 +59,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
               <div>
-                <h2>50</h2>
+                <h2>{{$service_count}}</h2>
                 <h4 class="title"><a href="#" class="stretched-link">Provided Services</a></h4>
               </div>
             </div>
@@ -81,11 +83,11 @@
         <div class="container">
 
           <div class="row gy-4">
-
             @foreach ($service as $service_item)
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+
+            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100" >
                 <div class="pricing-item featured">
-                  <p class="popular">{{$service_item->id}}</p>
+                  <p class="popular">{{$service_item->name}}</p>
                   <h3 class="">{{$service_item->title}}</h3>
                   <img src="{{ asset('serviceImages/'.$service_item->image) }}" class="mt-3 mb-4 img-fluid rounded" alt="">
                   <p class="description">{{ $truncated = Str::limit($service_item->description, 100, ' ...'); }}</p>
@@ -95,11 +97,12 @@
                       <li class="row"><label class="col-4 ">Type </label><span class="col">: {{$service_item->type}}</span></li>
                   </ul>
                   <h4><sup>mmk</sup>{{$service_item->fees}}<span> / session</span></h4>
-                  <a href="" class="cta-btn">See More</a>
+                  <a href="{{ route('serviceUserDetail', $service_item->id) }}" class="cta-btn">See More</a>
                   {{-- <p class="text-center small">No credit card required</p> --}}
 
                 </div>
-              </div><!-- End Pricing Item -->
+            </div><!-- End Pricing Item -->
+
             @endforeach
 
 
@@ -139,7 +142,7 @@
               <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
               <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
             </ul>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            {{-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> --}}
           </div>
 
           <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
@@ -360,7 +363,7 @@
               <div>
                 <h3>{{$category_item->name}}</h3>
                 <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-                <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
+                <a href="{{route('serviceCategory', $category_item->id)}}" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                 {{-- Display courses under the category --}}
               </div>
             </div>
@@ -550,85 +553,38 @@
           </script>
           <div class="swiper-wrapper">
 
+            @foreach ($ratingComment as $ratingComment_item)
             <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ asset('img/testimonials/testimonials-1.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+                <div class="testimonial-item">
+                    {{-- star --}}
+                  <div class="stars">
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ asset('img/testimonials/testimonials-2.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+                    @for ($i=0; $i < $ratingComment_item->rating ; $i++)
+                        <i class="bi bi-star-fill"></i>
+                    @endfor
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ asset('img/testimonials/testimonials-3.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+                    @for ($i=$ratingComment_item->rating; $i < 5 ; $i++)
+                        <i class="bi bi-star"></i>
+                    @endfor
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    {{-- <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i> --}}
+                  </div>
+                  <p>
+                    {{$ratingComment_item->comment}}
+                  </p>
+                  <div class="profile mt-auto">
+                    {{-- img --}}
+                    <img src="{{ asset('img/testimonials/testimonials-1.jpg') }}" class="testimonial-img" alt="">
+                    <h3>{{$ratingComment_item->user_name}}</h3>
+                    <h4>In {{$ratingComment_item->service_title}}</h4>
+                  </div>
                 </div>
-                <p>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ asset('img/testimonials/testimonials-4.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ asset('img/testimonials/testimonials-5.jpg') }}" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+              </div><!-- End testimonial item -->
+            @endforeach
 
           </div>
           <div class="swiper-pagination"></div>

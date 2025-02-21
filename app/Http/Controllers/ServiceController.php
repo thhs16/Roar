@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rating;
+use App\Models\Comment;
 use App\Models\Service;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -141,4 +143,122 @@ class ServiceController extends Controller
 
         return back()->with('Success Message', 'The service is deleted successfully.');
     }
+
+    public function serviceUserDetail($serviceId){
+        $service_detail = Service::where('id', $serviceId)->first();
+
+        $user_rating = Rating::where('ratings.user_id', auth()->user()->id)->where('ratings.service_id', $serviceId)->first();
+
+        $user_comment = Comment::where('user_id', auth()->user()->id)->where('service_id', $serviceId)->first();
+
+        $service_rating_count = Rating::where('service_id', $serviceId)->count();
+        $total_service_rating_value = Rating::where('service_id', $serviceId)->sum('rating');;
+        $overall_rating = $total_service_rating_value / $service_rating_count;
+
+        return view('user.serviceUserDetail', compact('service_detail', 'user_rating', 'user_comment', 'overall_rating'));
+    }
+
+    public function serviceUserRatingComment(Request $request){
+
+        // dd($request->all());
+        // two condition, has to update or create (db data)
+
+        $rating = Rating::where('user_id', $request->userId)
+                    ->where('service_id', $request->serviceId)
+                    ->first();
+
+        $comment = Comment::where('user_id', $request->userId)
+                    ->where('service_id', $request->serviceId)
+                    ->first();
+
+        $data = [
+            'user_id' => $request->userId,
+            'service_id' =>$request->serviceId,
+            'rating' =>$request->serviceRating
+        ];
+
+        $cmtData = [
+            'user_id' => $request->userId,
+            'service_id' =>$request->serviceId,
+            'comment' => $request->serviceUserComment
+        ];
+
+        if($rating){ // if rating exists, comment exists even in null
+
+            $ratingChange = $request->serviceRating != $rating->rating;
+            $commentChange = $request->serviceUserComment != $comment->comment;
+            $condition = $ratingChange | $commentChange;
+
+            if($condition){
+                if($ratingChange){
+
+                    Rating::where('user_id', $request->userId)
+                    ->where('service_id', $request->serviceId)
+                    ->update($data);
+                }
+
+                if($commentChange){
+
+                    Comment::where('user_id', $request->userId)
+                    ->where('service_id', $request->serviceId)
+                    ->update($cmtData);
+                }
+
+                return back()->with('Success Message', 'Your rating section has updated successfully.');
+            }else{
+                return back()->with('Alert Message', 'No Rating Data Changes.');
+            }
+
+        }
+
+        if($request->serviceUserComment == null){
+            $cmtData['comment'] = null;
+        }
+
+        Rating::create($data);
+        Comment::create($cmtData);
+
+        return back()->with('Success Message', 'Thank you for your rating.');
+    }
+
+    public function serviceCategory($categoryId){
+
+        $keyword = request('searchKey');
+
+        $service_category = Service::where('category_id', $categoryId) // Filter by category
+                    ->where(function($query) use ($keyword) {
+                        $query->where('title', 'LIKE', "%{$keyword}%") // Search in service name
+                    ->orWhere('description', 'LIKE', "%{$keyword}%"); // Search in description
+                    })
+                    ->get();
+
+        $category_name = Category::select('name')->where('id', $categoryId)->first();
+
+        $category_name = $category_name->name;
+
+
+        return view('user.serviceCategoryDetail', compact('service_category', 'categoryId', 'category_name'));
+
+
+    }
+
+    // public function searchService(Request $request){
+
+    //     // dd($request->all());
+    //     $keyword = $request->searchKey;
+
+    //     $service_category = Service::where('category_id', $request->categoryId) // Filter by category
+    //                 ->where(function($query) use ($keyword) {
+    //         $query->where('title', 'LIKE', "%{$keyword}%") // Search in service name
+    //               ->orWhere('description', 'LIKE', "%{$keyword}%"); // Search in description
+    //     })
+    //     ->get();
+
+    //     $categoryId = $request->categoryId;
+
+    //     // dd($service_category->toArray());
+
+    //     return view('user.serviceCategoryDetail', compact('service_category', 'categoryId'));
+
+    // }
 }

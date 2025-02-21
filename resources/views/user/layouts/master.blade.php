@@ -8,6 +8,9 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
+  {{-- Template for rating section --}}
+  <link href="{{ asset('user/css/custom.css') }}" rel="stylesheet">
+
   {{-- Meet with Expert/Profile Card --}}
   <link href="{{asset('css/expertsProfileCard.css')}}" rel="stylesheet">
 
@@ -48,42 +51,49 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center me-auto">
         <img src="{{asset('img/logo.png')}}" alt="">
         <h1 class="sitename">Roar</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#ourOffer">Our Offer</a></li>
-          <li><a href="#ourTutors">Our Tutors</a></li>
-          <li><a href="#about">About</a></li>
-          <li class="dropdown"><a href="#services"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href="{{ route('dashboard') }}#hero" class="active">Home</a></li>
+          <li><a href="{{ route('dashboard') }}#ourOffer">Our Offer</a></li>
+          <li><a href="{{ route('dashboard') }}#ourTutors">Our Tutors</a></li>
+          <li><a href="{{ route('dashboard') }}#about">About</a></li>
+          <li class="dropdown"><a href="{{ route('dashboard') }}#services"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+              @foreach ($category as $category_item)
+              <li><a href="{{route('serviceCategory', $category_item->id)}}">{{$category_item->name}}</a></li>
+              @endforeach
+
             </ul>
           </li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="{{ route('dashboard') }}#contact">Contact</a></li>
+          {{-- User Profile --}}
+          @if (auth()->user())
+          <li class="dropdown btn-getstarted">
+            <a href="#services">
+                <span><img class="rounded-circle" src="{{ auth()->user()->image ? asset('user/accImages/' . auth()->user()->image) : asset('admin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;"></span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i>
+            </a>
 
-
+            <ul>
+              <li><a href="{{ route('userProfile') }}">My Profile</a></li>
+              <li class="dropdown"><a href="{{ route('userServices') }}"><span>My Services</span> <i class="bi bi-chevron-down toggle-dropdown text-dark"></i></a>
+                {{-- <ul>
+                  <li><a href="#">My Appointments</a></li>
+                  <li><a href="#">My Classes</a></li>
+                </ul> --}}
+              </li>
+              <li><a href="{{ route('logout') }}">Logout</a></li>
+            </ul>
+          </li>
+          @endif
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-      <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
 
     </div>
   </header>
@@ -96,7 +106,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">QuickStart</span>
+            <span class="sitename">Roar</span>
           </a>
           <div class="footer-contact pt-3">
             <p>A108 Adam Street</p>
@@ -115,9 +125,9 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="{{ route('dashboard') }}#hero">Home</a></li>
+            <li><a href="{{ route('dashboard') }}#about">About us</a></li>
+            <li><a href="{{ route('dashboard') }}#services">Services</a></li>
             <li><a href="#">Terms of service</a></li>
             <li><a href="#">Privacy policy</a></li>
           </ul>
@@ -126,11 +136,10 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+
+            @foreach ($category as $category_item)
+              <li><a href="{{route('serviceCategory', $category_item->id)}}">{{$category_item->name}}</a></li>
+              @endforeach
           </ul>
         </div>
 
@@ -149,7 +158,7 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">QuickStart</strong><span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Roar</strong><span>All Rights Reserved</span></p>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you've purchased the pro version. -->

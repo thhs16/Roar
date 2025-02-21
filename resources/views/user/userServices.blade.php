@@ -32,7 +32,11 @@
                                 <td>{{$i}}</td>
                             <td>{{ \Carbon\Carbon::parse($userAppointment_item->aptTime)->format('h:i A - d M Y ( l )') }}</td>
                             <td>{{$userAppointment_item->expert_name}}</td>
-                            <td>{{$userAppointment_item->status}}</td>
+                            <td><div class=" @if ($userAppointment_item->status == 'booked')
+                                btn btn-success
+                            @else ($userAppointment_item->status == 'pending')
+                                btn btn-danger
+                            @endif">{{$userAppointment_item->status}}</div></td>
                             </tr>
                         @endforeach
 

@@ -37,7 +37,14 @@
                         <tr>
                             <th scope="row">{{$i}}</th>
                             <td>{{$appointment_item->aptTime}}</td>
-                            <td>{{$appointment_item->status}}</td>
+                            <td><div class=" @if ($appointment_item->status == 'booked')
+                                btn btn-success
+
+                            @elseif ($appointment_item->status == 'pending')
+                                btn btn-danger
+                            @else
+                                btn btn-warning
+                            @endif">{{$appointment_item->status}}</div></td>
                             <td>{{$appointment_item->student_name}}</td>
                             <td>{{$appointment_item->student_email}}</td>
                             <td>{{$appointment_item->student_phone}}</td>

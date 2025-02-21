@@ -36,8 +36,12 @@
                             <td>{{$adminList_item->email}}</td>
                             <td>{{$adminList_item->phone}}</td>
                             <td>
-                                <a href="{{ route('updateAdmin', $adminList_item->id ) }}" class="btn btn-primary">Update</a>
-                                <a href="{{ route('categoryDelete', $adminList_item->id ) }}"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                @if ($adminList_item->role != 'superAdmin')
+                                    @if ($adminList_item->role != auth()->user()->role )
+                                        <a href="{{ route('categoryDelete', $adminList_item->id ) }}"  class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                    @endif
+                                @endif
+
                             </td>
                         </tr>
                     @endforeach

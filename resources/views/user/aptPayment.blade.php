@@ -27,8 +27,8 @@
                                 </div>
                                 <div class="row ">
                                     <div class="col-5 shadow-sm p-3">
-                                        <div>Appointment Date : {{ \Carbon\Carbon::parse($appointment->aptTime)->format('h:i A - d M Y ( l )') }}</div>
-                                        <div>Appointment Time : {{ \Carbon\Carbon::parse($appointment->aptTime)->format('h:i A - d M Y ( l )') }}</div>
+                                        <div>Appointment Date : {{ \Carbon\Carbon::parse($appointment->aptTime)->format('d M Y ( l )') }}</div>
+                                        <div>Appointment Time : {{ \Carbon\Carbon::parse($appointment->aptTime)->format('h:i A ') }}</div>
                                         <hr>
                                         <div>Expert Name : {{$appointment->expert_name}}</div>
                                         <div>Service Name : Consultation</div>

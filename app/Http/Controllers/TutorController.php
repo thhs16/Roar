@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Appointment;
 
 class TutorController extends Controller
 {
@@ -13,7 +16,19 @@ class TutorController extends Controller
      */
     public function expertDashboard()
     {
-        return view('expert.expertDashboard');
+        $booked_apt_count = Appointment::where('status', 'booked')
+                            ->where('expert_id', auth()->user()->id)
+                            ->count();
+
+        $pending_apt_count = Appointment::where('status', 'pending')
+                            ->where('expert_id', auth()->user()->id)
+                            ->count();
+
+        $avl_apt_count = Appointment::where('status', 'available')
+                            ->where('expert_id', auth()->user()->id)
+                            ->count();
+
+        return view('expert.expertDashboard', compact('booked_apt_count', 'pending_apt_count', 'avl_apt_count'));
     }
 
     public function index()
@@ -206,5 +221,101 @@ class TutorController extends Controller
     public function addAptTime()
     {
         return view('expert.addAptTime');
+    }
+
+    public function profile()
+    {
+        return view('expert.expertProfile');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function profileUpdate(Request $request)
+    {
+        // dd($request->all());
+
+        $validation = $request->validate([
+            'name' => 'required',
+            'image' => 'mimes:jpeg,png,jpg,gif'
+        ]);
+
+        $user = User::where('users.id', auth()->user()->id)->first();
+
+
+        // condition
+        $imageChange = $request->image != null ? 1 : 0 ;     // 0
+        $nameChange = $request->name != $user->name ? 1 : 0 ;      // 0
+        $phoneChange = $request->phone != $user->phone ? 1 : 0 ;       //0
+        $addressChange = $request->address != $user->address ? 1 : 0 ;     //0
+
+        $changeCondition = $imageChange | $nameChange | $phoneChange | $addressChange ;
+
+        $data = [];
+
+        if($changeCondition){
+
+            if($nameChange){
+
+                $data = array_merge($data , ['name' => $request->name]);
+
+            }
+            if ($phoneChange) {
+                $data = array_merge($data, ['phone' => $request->phone]);
+
+            }
+
+            if ($addressChange) {
+                $data = array_merge($data, ['address' => $request->address]);
+            }
+
+
+            if ($imageChange) {
+
+                $fileName = 'roar'.uniqid() . $request->file('image')->getClientOriginalName();
+
+                $request->file('image')->move(public_path().'/admin/adminAndExpertProfileImg/', $fileName);
+
+
+                if ($user->image != null) {
+                    if (file_exists(public_path('admin/adminAndExpertProfileImg/' .$user->image))) {
+                        unlink( public_path("admin/adminAndExpertProfileImg/".$user->image) );
+                    }
+                }
+
+                $data = array_merge($data, ['image' => $fileName]);
+            }
+
+            // dd($data);
+
+            if($data != []){
+                User::where('id', auth()->user()->id)->update($data);
+            }
+
+            return back()->with('Success Message', 'The admin info is updated successfully.');
+
+         }else{
+            return back()->with('Success Message', 'No Data Changes. You need to edit data to update');
+         }
+    }
+
+    public function updateProfilePassword(Request $request)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            'oldPassword' => 'required',
+            'newPassword' => 'required|min:6|confirmed',
+        ]);
+
+        if (!Hash::check($request->oldPassword, auth()->user()->password)) {
+            return back()->withErrors(['old_password' => 'Old password is incorrect']);
+        }
+
+        Auth::user()->update([
+            'password' => Hash::make($request->newPassword),
+        ]);
+
+        return redirect()->back()->with('Success Message', 'Password changed successfully!');
     }
 }

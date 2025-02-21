@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('service_id');
-            $table->longText('comment');
+            $table->longText('comment')->nullable();
             $table->timestamps();
         });
     }
