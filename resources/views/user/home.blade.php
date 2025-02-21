@@ -11,7 +11,7 @@
             <div class="container text-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     <h1 data-aos="fade-up">Welcome to <span>Roar</span></h1>
-                    <p class="mt-3" data-aos="fade-up" data-aos-delay="100"><i class="esteban-regular">You do not need to be silent. You just have to
+                    <p class="mt-3" data-aos="fade-up" data-aos-delay="100"><i class="fst-italic esteban-regular">You do not need to be silent. You just have to
                         roar.</i><br></p>
 
                     <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
