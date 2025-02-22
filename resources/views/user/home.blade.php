@@ -93,8 +93,10 @@
                             <div class="pricing-item featured">
                                 <p class="popular">{{ $service_item->name }}</p>
                                 <h3 class="mt-3">{{ $service_item->title }}</h3>
-                                <img src="{{ asset('serviceImages/' . $service_item->image) }}"
-                                    class="mt-3 mb-4 img-fluid rounded" alt="">
+                                <div class="text-center"><img src="{{ asset('serviceImages/' . $service_item->image) }}"
+                                    class="mt-3 mb-4 img-fluid rounded"
+                                    style="width: 200px; height: 200px; object-fit: cover;"
+                                    alt=""></div>
                                 <p class="description">
                                     {{ $truncated = Str::limit($service_item->description, 100, ' ...') }}</p>
                                 <ul>

@@ -152,9 +152,10 @@ class ServiceController extends Controller
         $user_comment = Comment::where('user_id', auth()->user()->id)->where('service_id', $serviceId)->first();
 
         $service_rating_count = Rating::where('service_id', $serviceId)->count();
-        $total_service_rating_value = Rating::where('service_id', $serviceId)->sum('rating');;
-        $overall_rating = $total_service_rating_value / $service_rating_count;
+        $total_service_rating_value = Rating::where('service_id', $serviceId)->sum('rating');
 
+        $overall_rating = $service_rating_count == 0 ? 0 : $total_service_rating_value / $service_rating_count;
+        dd($overall_rating);
         return view('user.serviceUserDetail', compact('service_detail', 'user_rating', 'user_comment', 'overall_rating'));
     }
 

@@ -23,7 +23,7 @@
                                     <th scope="col">Student Name</th>
                                     <th scope="col">Student Email</th>
                                     <th scope="col">Student Phone</th>
-                                    <th scope="col">Features</th>
+                                    {{-- <th scope="col">Features</th> --}}
 
 
                                 </tr>
@@ -50,10 +50,10 @@
                                         <td>{{ $appointment_item->student_name }}</td>
                                         <td>{{ $appointment_item->student_email }}</td>
                                         <td>{{ $appointment_item->student_phone }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <a href="{{ route('categoryDelete', $appointment_item->id) }}"
                                                 class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
 
