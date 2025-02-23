@@ -6,7 +6,11 @@
                 <div class="card-item swiper-slide">
 
                     <img src="{{ $expert_item->image ? asset('admin/adminAndExpertProfileImg/' . $expert_item->image) : asset('admin/img/user.jpg') }}"
-                        alt="User Image" class="user-image">
+    alt="User Image"
+    class="user-image img-fluid"
+    style="width: 150px; height: 150px; object-fit: cover; object-position: top; border-top-left-radius: 50%; border-top-right-radius: 50%;">
+
+
 
                     <h2 class="user-name">{{ $expert_item->display_name }}</h2>
                     <p class="user-profession">Roar Speaking Expert</p>

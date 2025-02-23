@@ -16,9 +16,6 @@ use App\Http\Controllers\AppointmentController;
 
 // User
 Route::middleware(['user', 'auth', 'web'])->group(function () {
-    Route::get('/', function () {
-        return redirect('/dashboard');
-    });
 
 
     Route::get('/dashboard', function () {

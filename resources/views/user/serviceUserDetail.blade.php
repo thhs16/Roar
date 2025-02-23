@@ -64,8 +64,8 @@
                                 Service Fees : {{ $service_detail->fees }}
                             </p>
                             <ul>
-                                <li><i class="bi bi-check-circle"></i> <span>Trained Student :
-                                        {{ $service_detail->trained_student }}</span></li>
+                                {{-- <li><i class="bi bi-check-circle"></i> <span>Trained Student :
+                                        {{ $service_detail->trained_student }}</span></li> --}}
                                 <li><i class="bi bi-check-circle"></i> <span>Ratings : {{ $overall_rating }}</span></li>
                                 <li>
                                     @for ($i = 0; $i < $overall_rating; $i++)
@@ -158,10 +158,7 @@
                                                 <input type="hidden" name="userId" value="{{ auth()->user()->id }}">
 
 
-                                                <textarea name="serviceUserComment" class=" form-control" placeholder="Your Comment" cols="30" rows="10">
-                                                    @if ($user_comment)
-                                                        {{ $user_comment->comment }}
-                                                    @endif
+                                                <textarea name="serviceUserComment" class=" form-control" placeholder="Your Comment" cols="30" rows="10">@if ($user_comment){{ $user_comment->comment }}@endif
                                                 </textarea>
 
                                             </div>

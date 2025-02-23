@@ -78,12 +78,15 @@ class TutorController extends Controller
         $validation = $request->validate([
             'name' => 'required',
             'about' => 'required',
+            'displayName' => 'required'
         ]);
 
         $expert = User::select('users.*', 'tutors.*')
             ->where('users.id', $request->id)
             ->leftJoin('tutors', 'tutors.user_id', 'users.id')
             ->first();
+
+        // dd($expert->toArray());
 
 
         // condition
@@ -147,7 +150,7 @@ class TutorController extends Controller
 
                 unlink(public_path("admin/adminAndExpertProfileImg/" . $expert->image));
 
-                $data = array_merge($dataUser, ['image' => $fileName]);
+                $dataUser = array_merge($dataUser, ['image' => $fileName]);
             }
 
             if ($dataUser != []) {

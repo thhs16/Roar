@@ -155,7 +155,7 @@ class ServiceController extends Controller
         $total_service_rating_value = Rating::where('service_id', $serviceId)->sum('rating');
 
         $overall_rating = $service_rating_count == 0 ? 0 : $total_service_rating_value / $service_rating_count;
-        dd($overall_rating);
+
         return view('user.serviceUserDetail', compact('service_detail', 'user_rating', 'user_comment', 'overall_rating'));
     }
 
