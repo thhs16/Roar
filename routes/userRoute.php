@@ -17,6 +17,9 @@ use App\Http\Controllers\AppointmentController;
 // User
 Route::middleware(['user', 'auth', 'web'])->group(function () {
 
+    Route::get('/', function () {
+        return to_route('adminDashboard');
+    });
 
     Route::get('/dashboard', function () {
 
@@ -40,7 +43,7 @@ Route::middleware(['user', 'auth', 'web'])->group(function () {
         ->leftJoin('users', 'users.id', 'tutors.user_id')
         ->get();
 
-        // dd($expert-toArray());
+        // dd($expert->toArray());
 
         $category = Category::get();
 

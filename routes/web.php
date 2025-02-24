@@ -25,20 +25,7 @@ use App\Http\Controllers\AppointmentController;
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
-Route::get('/', function () {
-    if(auth()->user()->role == 'superAdmin' | auth()->user()->role == 'admin'){
-        return to_route('adminDashboard');
 
-    }
-
-    if(auth()->user()->role == 'expert'){
-        return to_route('expertDashboard');
-    }
-
-    if(auth()->user()->role == 'user'){
-        return to_route('dashboard');
-    }
-});
 
 require __DIR__.'/auth.php';
 

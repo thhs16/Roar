@@ -8,6 +8,9 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AppointmentController;
 
 Route::group([ 'prefix' => 'admin', 'middleware' => ['admin', 'auth']], function(){
+    Route::get('/', function () {
+        return to_route('adminDashboard');
+    });
 
     Route::get('dashboard', [adminController::class, 'adminDashboard'])
             ->name('adminDashboard');
@@ -89,7 +92,7 @@ Route::group([ 'prefix' => 'admin', 'middleware' => ['admin', 'auth']], function
 
     Route::get('userList', [adminController::class, 'userList'])
             ->name('userList');
-            
+
     // Admin Profile Page
     Route::get('profile', [adminController::class, 'profile'])->name('adminProfile');
 

@@ -6,6 +6,9 @@ use App\Http\Controllers\AppointmentController;
 
 // expert
 Route::group([ 'prefix' => 'expert', 'middleware' => ['expert', 'auth']], function(){
+    Route::get('/', function () {
+        return to_route('expertDashboard');
+    });
 
     Route::get('dashboard', [TutorController::class, 'expertDashboard'])
             ->name('expertDashboard');
