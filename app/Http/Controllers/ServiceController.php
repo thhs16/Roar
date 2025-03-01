@@ -42,7 +42,7 @@ class ServiceController extends Controller
 
     public function serviceList()
     {
-        $service = Service::paginate(2);
+        $service = Service::paginate(5);
 
         return view('admin.serviceList', compact('service'));
     }
@@ -230,7 +230,7 @@ class ServiceController extends Controller
                 $query->where('title', 'LIKE', "%{$keyword}%") // Search in service name
                     ->orWhere('description', 'LIKE', "%{$keyword}%"); // Search in description
             })
-            ->paginate(1);
+            ->paginate(3);
 
         $category_name = Category::select('name')->where('id', $categoryId)->first();
 

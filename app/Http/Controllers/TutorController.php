@@ -64,7 +64,7 @@ class TutorController extends Controller
 
     public function show()
     {
-        $expertList = User::where('role', 'expert')->paginate(2);
+        $expertList = User::where('role', 'expert')->paginate(5);
         return view('admin.expertList', compact('expertList'));
     }
 

@@ -9,18 +9,18 @@
     <meta name="keywords" content="">
 
     {{-- Template for rating section --}}
-    <link href="{{ asset('user/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('user/css/custom.css') }}" rel="stylesheet">
 
     {{-- Meet with Expert/Profile Card --}}
-    <link href="{{ asset('css/expertsProfileCard.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/expertsProfileCard.css') }}" rel="stylesheet">
 
     {{-- Carousel - Meet with Expert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link href="{{ asset('css/carouselMeetWithExperts.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/carouselMeetWithExperts.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
-    <link href="{{ asset('img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ secure_asset('img/favicon.png') }}" rel="icon">
+    <link href="{{ secure_asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -31,14 +31,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Esteban&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-    {{-- <link href="{{asset('vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet"> --}}
+    <link href="{{ secure_asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{secure_asset('vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet"> --}}
 
     <!-- Main CSS File -->
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/main.css') }}" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: QuickStart
@@ -55,7 +55,7 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
             <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center me-auto">
-                <img src="{{ asset('img/logo.png') }}" alt="">
+                <img src="{{ secure_asset('img/logo.png') }}" alt="">
                 <h1 class="sitename">Roar</h1>
             </a>
 
@@ -82,7 +82,7 @@
                         <li class="dropdown btn-getstarted">
                             <a href="#services">
                                 <span><img class="rounded-circle"
-                                        src="{{ auth()->user()->image ? asset('user/accImages/' . auth()->user()->image) : asset('admin/img/user.jpg') }}"
+                                        src="{{ auth()->user()->image ? secure_asset('user/accImages/' . auth()->user()->image) : secure_asset('admin/img/user.jpg') }}"
                                         alt="" style="width: 40px; height: 40px;"></span>
                                 <i class="bi bi-chevron-down toggle-dropdown"></i>
                             </a>
@@ -181,7 +181,7 @@
     {{-- Carousel JS/ Meet with the experts --}}
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="{{ asset('js/carouselMeetWithExperts.js') }}"></script>
+    <script src="{{ secure_asset('js/carouselMeetWithExperts.js') }}"></script>
 
     {{-- font-awesome all in one kit --}}
     <script src="https://kit.fontawesome.com/905758c01a.js" crossorigin="anonymous"></script>
@@ -194,14 +194,14 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
-    <script src="{{ asset('vendor/aos/aos.js') }}"></script>
-    <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
-    {{-- <script src="{{asset('vendor/swiper/swiper-bundle.min.js')}}"></script> --}}
+    <script src="{{ secure_asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ secure_asset('vendor/aos/aos.js') }}"></script>
+    <script src="{{ secure_asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
+    {{-- <script src="{{secure_asset('vendor/swiper/swiper-bundle.min.js')}}"></script> --}}
 
     <!-- Main JS File -->
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ secure_asset('js/main.js') }}"></script>
 
     {{-- Image Preview | product --}}
     <script>

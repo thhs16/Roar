@@ -78,7 +78,7 @@ class adminController extends Controller
 
     // categoryList admin
     public function categoryList(){
-        $category = Category::select('id', 'name')->paginate(2);
+        $category = Category::select('id', 'name')->paginate(5);
 
         return view('admin.categoryList', compact('category'));
     }
@@ -157,7 +157,7 @@ class adminController extends Controller
     }
 
     public function adminList(){
-        $adminList = User::where('role', 'superAdmin')->orWhere('role', 'admin')->paginate(2);
+        $adminList = User::where('role', 'superAdmin')->orWhere('role', 'admin')->paginate(5);
         return view('admin.adminList', compact('adminList'));
     }
 
