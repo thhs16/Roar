@@ -16,6 +16,7 @@ class ProviderController extends Controller
 
     // callback Socialite
     public function callback($provider){
+        // dd($provider);
         $socialiteUser = Socialite::driver($provider)->user();
 
         // if providerName and ID are not the same it will create data. Otherwise, it will update.
