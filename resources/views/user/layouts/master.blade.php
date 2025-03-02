@@ -9,10 +9,11 @@
     <meta name="keywords" content="">
 
     {{-- Template for rating section --}}
-    <link href="{{ asset('user/css/custom.css') }}" rel="stylesheet">
+    @vite('resources/user/css/custom.css')
+    {{-- <link href="{{ asset('user/css/custom.css') }}" rel="stylesheet"> --}}
 
     {{-- Meet with Expert/Profile Card --}}
-    <link href="{{ asset('css/expertsProfileCard.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/css/expertsProfileCard.css') }}" rel="stylesheet">
 
     {{-- Carousel - Meet with Expert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -38,7 +39,8 @@
     {{-- <link href="{{asset('vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet"> --}}
 
     <!-- Main CSS File -->
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    @vite('resources/user/css/main.css')
+    {{-- <link href="{{ asset('css/main.css') }}" rel="stylesheet"> --}}
 
     <!-- =======================================================
   * Template Name: QuickStart
