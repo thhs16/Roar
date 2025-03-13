@@ -5,7 +5,6 @@
         "dev": "vite",
         "build": "vite build",
         "watch": "vite build --watch",
-        "build": "vite build",
         "postinstall": "npm run build"
     },
     "devDependencies": {
