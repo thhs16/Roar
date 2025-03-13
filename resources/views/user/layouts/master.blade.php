@@ -9,7 +9,7 @@
     <meta name="keywords" content="">
 
     {{-- Template for rating section --}}
-    @vite('resources/user/css/custom.css')
+    @vite(['resources/user/css/custom.css'])
     {{-- <link href="{{ asset('user/css/custom.css') }}" rel="stylesheet"> --}}
 
     {{-- Meet with Expert/Profile Card --}}
@@ -39,7 +39,7 @@
     {{-- <link href="{{asset('vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet"> --}}
 
     <!-- Main CSS File -->
-    @vite('resources/user/css/main.css')
+    @vite(['resources/user/css/main.css'])
     {{-- <link href="{{ asset('css/main.css') }}" rel="stylesheet"> --}}
 
     <!-- =======================================================
