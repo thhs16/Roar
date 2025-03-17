@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<pre>{{ file_get_contents(public_path('build/manifest.json')) }}</pre>
+<!-- <pre>{{ file_get_contents(public_path('build/manifest.json')) }}</pre> -->
 <html lang="en">
 
 <head>
