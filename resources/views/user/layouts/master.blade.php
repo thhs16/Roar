@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<pre>{{ json_encode(Vite::manifest(), JSON_PRETTY_PRINT) }}</pre>
 <html lang="en">
 
 <head>
