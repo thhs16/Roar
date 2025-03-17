@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<pre>{{ json_encode(Vite::manifest(), JSON_PRETTY_PRINT) }}</pre>
+<pre>{{ file_get_contents(public_path('build/manifest.json')) }}</pre>
 <html lang="en">
 
 <head>
