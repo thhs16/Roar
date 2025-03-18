@@ -12,16 +12,17 @@
     {{-- Template for rating section --}}
     @vite('resources/user/css/custom.css')
 
+
     {{-- Meet with Expert/Profile Card --}}
-    @vite('resources/user/css/expertsProfileCard.css')
+    <link href="{{ asset('resources/user/css/expertsProfileCard.css') }}" rel="stylesheet">
+
 
     {{-- Carousel - Meet with Expert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link href="{{ asset('resources/user/css/carouselMeetWithExperts.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
-    @vite('resources/user/img/favicon.png')
-    @vite('resources/user/img/apple-touch-icon.png')
+    <link href="{{ asset('resources/user/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('resources/user/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
