@@ -62,7 +62,7 @@
                             </form>
                         </div>
                         <div class=" col-lg-6">
-                            <img src="{{ asset('img/authImg/loginImg.jpg') }}" class=" img-fluid rounded-end-5"
+                            <img src="{{ asset('authImg/loginImg.jpg') }}" class=" img-fluid rounded-end-5"
                                 alt="">
                         </div>
                     </div>

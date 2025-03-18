@@ -22,8 +22,8 @@
     <link href="{{ asset('resources/user/css/carouselMeetWithExperts.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
-    <link href="{{ asset('resources/user/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('resources/user/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('user/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('user/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
