@@ -59,7 +59,7 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
             <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center me-auto">
-                <img src="{{ asset('img/logo.png') }}" alt="">
+                <img src="{{ asset('user/img/logo.png') }}" alt="">
                 <h1 class="sitename">Roar</h1>
             </a>
 
