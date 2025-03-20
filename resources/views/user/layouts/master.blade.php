@@ -19,7 +19,8 @@
 
     {{-- Carousel - Meet with Expert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link href="{{ asset('resources/user/css/carouselMeetWithExperts.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('resources/user/css/carouselMeetWithExperts.css') }}" rel="stylesheet"> --}}
+    @vite('resources/user/css/carouselMeetWithExperts.css')
 
     <!-- Favicons -->
     <link href="{{ asset('user/img/favicon.png') }}" rel="icon">
