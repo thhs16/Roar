@@ -6,7 +6,7 @@
         <!-- Hero Section -->
         <section id="hero" class="hero section">
             <div class="hero-bg">
-                <img src="{{ asset('img/hero-bg-light.webp') }}" alt="">
+                <img src="{{ asset('user/img/hero-bg-light.webp') }}" alt="">
             </div>
             <div class="container text-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
@@ -21,7 +21,7 @@
                                 class="bi bi-play-circle"></i><span>What is Roar ?</span></a>
                     </div>
 
-                    <img src="{{ asset('img/main_photo.png') }}" class="img-fluid hero-img" alt=""
+                    <img src="{{ asset('user/img/main_photo.png') }}" class="img-fluid hero-img" alt=""
                         data-aos="zoom-out" data-aos-delay="300">
                 </div>
             </div>

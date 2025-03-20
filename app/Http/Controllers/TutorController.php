@@ -148,7 +148,10 @@ class TutorController extends Controller
 
                 $request->file('image')->move(public_path() . '/admin/adminAndExpertProfileImg/', $fileName);
 
-                unlink(public_path("admin/adminAndExpertProfileImg/" . $expert->image));
+                if( file_exists( public_path("admin/adminAndExpertProfileImg/" . $expert->image )) ){
+                    unlink(public_path("admin/adminAndExpertProfileImg/" . $expert->image));
+                }
+
 
                 $dataUser = array_merge($dataUser, ['image' => $fileName]);
             }
