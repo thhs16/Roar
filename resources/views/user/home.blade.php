@@ -167,16 +167,16 @@
                     <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
                         <div class="row gy-4">
                             <div class="col-lg-6">
-                                <img src="{{ asset('img/about-company-1.jpg') }}" class="img-fluid" alt="">
+                                <img src="{{ asset('user/img/about-company-1.jpg') }}" class="img-fluid" alt="">
                             </div>
                             <div class="col-lg-6">
                                 <div class="row gy-4">
                                     <div class="col-lg-12">
-                                        <img src="{{ asset('img/about-company-2.jpg') }}" class="img-fluid"
+                                        <img src="{{ asset('user/img/about-company-2.jpg') }}" class="img-fluid"
                                             alt="">
                                     </div>
                                     <div class="col-lg-12">
-                                        <img src="{{ asset('img/about-company-3.jpg') }}" class="img-fluid"
+                                        <img src="{{ asset('user/img/about-company-3.jpg') }}" class="img-fluid"
                                             alt="">
                                     </div>
                                 </div>
