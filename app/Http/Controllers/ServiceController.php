@@ -121,7 +121,9 @@ class ServiceController extends Controller
 
                 $request->file('serviceImage')->move(public_path() . '/serviceImages/', $fileName);
 
-                unlink(public_path('serviceImages/' . $service->image));
+                if( file_exists( public_path('serviceImages/' . $service->image))){
+                    unlink(public_path('serviceImages/' . $service->image));
+                }
 
 
 
